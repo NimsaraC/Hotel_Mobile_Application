@@ -26,13 +26,16 @@
 
             <TextView
                 android:id="@+id/textView"
+                android:layout_marginTop="2dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/main_title"
-                android:text="LuxeVista"
+                android:layout_gravity="center"
+                android:gravity="start"
+                android:text="Services at LuxeVista"
                 android:textColor="@color/white"
-                android:textSize="30dp" />
+                android:textSize="23dp" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="45dp"
@@ -139,13 +142,13 @@
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:fontFamily="@font/main_title"
-                    android:text="Rooms"
+                    android:text="Services"
                     android:textColor="@color/white"
                     android:textSize="25dp"
                     android:textStyle="bold" />
 
                 <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/tabLayout"
+                    android:id="@+id/tabLayoutService"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/background"
@@ -158,22 +161,22 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:focusedByDefault="true"
-                        android:text="Ocean View" />
+                        android:text="Spa" />
 
                     <com.google.android.material.tabs.TabItem
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Deluxe" />
+                        android:text="Dining" />
 
                     <com.google.android.material.tabs.TabItem
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Family" />
+                        android:text="Pool" />
 
                 </com.google.android.material.tabs.TabLayout>
 
                 <FrameLayout
-                    android:id="@+id/frameHomepage"
+                    android:id="@+id/frameServicePage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -221,7 +224,7 @@
                 android:layout_width="match_parent"
                 android:textAlignment="center"
                 android:fontFamily="@font/main"
-                android:textColor="@color/Button"
+                android:textColor="@color/white"
                 android:textStyle="bold"
                 android:layout_height="wrap_content"
                 android:text="Home" />
@@ -295,7 +298,7 @@
                 android:layout_width="match_parent"
                 android:textAlignment="center"
                 android:fontFamily="@font/main"
-                android:textColor="@color/white"
+                android:textColor="@color/Button"
                 android:textStyle="bold"
                 android:layout_height="wrap_content"
                 android:text="Services" />
