@@ -22,7 +22,8 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:text="LuxeVista"
-            android:textSize="40dp"
+            android:textSize="45dp"
+            android:fontFamily="@font/main_title"
             android:layout_marginTop="50dp"
             android:textAlignment="center"
             android:textColor="@color/white"/>
@@ -53,6 +54,7 @@
                 android:textAlignment="center"
                 android:layout_marginTop="-50dp"
                 android:textColor="@color/white"
+                android:fontFamily="@font/title"
                 android:textStyle="bold"
                 android:textSize="30dp"/>
 
@@ -66,6 +68,7 @@
                 android:textColorHint="@color/subtitle"
                 android:textColor="@color/white"
                 android:layout_margin="10dp"
+                android:fontFamily="@font/main"
                 android:textSize="20dp"
                 android:hint="Email" />
 
@@ -79,6 +82,7 @@
                 android:textColorHint="@color/subtitle"
                 android:textColor="@color/white"
                 android:layout_margin="10dp"
+                android:fontFamily="@font/main"
                 android:textSize="20dp"
                 android:hint="Password" />
 
@@ -108,6 +112,7 @@
                         android:textSize="25dp"
                         android:textColor="@color/background"
                         android:textStyle="bold"
+                        android:fontFamily="@font/title"
                         android:text="Sign in" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -115,26 +120,29 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
                 android:layout_gravity="center"
-                android:paddingTop="20dp"
-                android:gravity="center">
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:paddingTop="20dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/main"
+                    android:text="Don't have an account? "
                     android:textColor="@color/subtitle"
-                    android:textSize="18dp"
-                    android:text="Don't have an account? "/>
+                    android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/txtDontHaveAccount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/main"
                     android:text="Sign up"
-                    android:textSize="18dp"
-                    android:textStyle="bold"
-                    android:layout_marginStart="10dp"/>
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
