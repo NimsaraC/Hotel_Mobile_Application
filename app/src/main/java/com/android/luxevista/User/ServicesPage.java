@@ -110,5 +110,12 @@ public class ServicesPage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        navProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), BookingPage.class);
+                startActivity(intent);
+            }
+        });
     }
 }

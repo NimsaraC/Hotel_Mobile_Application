@@ -6,4 +6,11 @@
         <item name="android:fontFamily">@font/main</item>
     </style>
 
+    <style name="TabTextStyleBooking">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/main</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>

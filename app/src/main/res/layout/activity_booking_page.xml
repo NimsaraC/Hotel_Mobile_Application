@@ -26,14 +26,11 @@
 
             <TextView
                 android:id="@+id/textView"
-                android:layout_marginTop="2dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/main_title"
-                android:layout_gravity="center"
-                android:gravity="start"
-                android:text="Explore LuxeVista"
+                android:text="My LuxeVista Bookings"
                 android:textColor="@color/white"
                 android:textSize="23dp" />
 
@@ -83,24 +80,6 @@
                 android:background="@color/background"
                 android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/editTextText"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/text_filed"
-                    android:ems="10"
-                    android:fontFamily="@font/title"
-                    android:inputType="text"
-                    android:padding="0dp"
-                    android:text="Search"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textStyle="bold" />
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -113,28 +92,19 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="@font/main_title"
-                        android:text="Best Deals"
+                        android:text="Booking Calendar"
+                        android:layout_marginTop="15dp"
+                        android:textAlignment="center"
                         android:textColor="@color/white"
                         android:textSize="25dp"
                         android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/textView4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/main"
-                        android:text="See more"
-                        android:textAlignment="textEnd"
-                        android:textColor="@color/Button"
-                        android:textStyle="bold" />
                 </LinearLayout>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/homeDeals"
+                <CalendarView
+                    android:id="@+id/calendarView"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_marginBottom="10dp" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -142,41 +112,41 @@
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:fontFamily="@font/main_title"
-                    android:text="Explore"
+                    android:text="Bookings"
                     android:textColor="@color/white"
                     android:textSize="25dp"
                     android:textStyle="bold" />
 
                 <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/tabLayoutService"
+                    android:id="@+id/tabLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/background"
                     android:elevation="2dp"
                     app:tabSelectedTextColor="@color/Button"
-                    app:tabTextAppearance="@style/TabTextStyle"
+                    app:tabTextAppearance="@style/TabTextStyleBooking"
                     app:tabTextColor="@color/white">
 
                     <com.google.android.material.tabs.TabItem
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:focusedByDefault="true"
-                        android:text="Local" />
+                        android:text="Upcoming" />
 
                     <com.google.android.material.tabs.TabItem
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Water" />
+                        android:text="Completed" />
 
                     <com.google.android.material.tabs.TabItem
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Nightlife" />
+                        android:text="Canceled" />
 
                 </com.google.android.material.tabs.TabLayout>
 
                 <FrameLayout
-                    android:id="@+id/frameExplorePage"
+                    android:id="@+id/frameBookingPage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -185,6 +155,8 @@
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
+
+<!--    BottomNav-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -302,7 +274,7 @@
                 android:layout_width="match_parent"
                 android:textAlignment="center"
                 android:fontFamily="@font/main"
-                android:textColor="@color/Button"
+                android:textColor="@color/white"
                 android:textStyle="bold"
                 android:layout_height="wrap_content"
                 android:text="Explore" />
@@ -339,7 +311,7 @@
                 android:layout_width="match_parent"
                 android:textAlignment="center"
                 android:fontFamily="@font/main"
-                android:textColor="@color/white"
+                android:textColor="@color/Button"
                 android:textStyle="bold"
                 android:layout_height="wrap_content"
                 android:text="Booking" />

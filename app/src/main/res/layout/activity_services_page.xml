@@ -329,7 +329,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/profile" />
+                        android:src="@drawable/schedule" />
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
@@ -341,7 +341,7 @@
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 android:layout_height="wrap_content"
-                android:text="Profile" />
+                android:text="Booking" />
         </LinearLayout>
     </LinearLayout>
 
