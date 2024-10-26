@@ -19,7 +19,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.android.luxevista.R;
 import com.google.android.material.tabs.TabLayout;
 
-public class ServicesPage extends AppCompatActivity {
+public class ExplorePage extends AppCompatActivity {
 
     private TabLayout tabLayout;
     private FrameLayout frameLayout;
@@ -29,7 +29,7 @@ public class ServicesPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_services_page);
+        setContentView(R.layout.activity_explore_page);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -37,7 +37,7 @@ public class ServicesPage extends AppCompatActivity {
         });
 
         tabLayout = findViewById(R.id.tabLayoutService);
-        frameLayout = findViewById(R.id.frameServicePage);
+        frameLayout = findViewById(R.id.frameExplorePage);
 
         navServices = findViewById(R.id.linearLayoutServices);
         navExplore = findViewById(R.id.linearLayoutExplore);
@@ -47,20 +47,20 @@ public class ServicesPage extends AppCompatActivity {
         bottomNav();
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        fragmentImplementation(new ServicesPageFragment(),"Spa & Wellness");
+        fragmentImplementation(new ExplorePageFragment(),"Local Attractions");
 
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
 
                 if(tab.getPosition() == 0){
-                    fragmentImplementation(new ServicesPageFragment(), "Spa & Wellness");
+                    fragmentImplementation(new ExplorePageFragment(), "Local Attractions");
                 }
                 if(tab.getPosition() == 1){
-                    fragmentImplementation(new ServicesPageFragment(), "Dining Reservations");
+                    fragmentImplementation(new ExplorePageFragment(), "Water Activities");
                 }
                 if(tab.getPosition() == 2){
-                    fragmentImplementation(new ServicesPageFragment(), "Poolside Cabanas");
+                    fragmentImplementation(new ExplorePageFragment(), "Dining & Nightlife");
                     //Toast.makeText(HomePage.this, "Room3", Toast.LENGTH_SHORT).show();
                 }
 
@@ -77,6 +77,7 @@ public class ServicesPage extends AppCompatActivity {
             }
         });
     }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -90,9 +91,9 @@ public class ServicesPage extends AppCompatActivity {
     private void fragmentImplementation(Fragment fragment, String title){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frameServicePage, fragment);
+        fragmentTransaction.replace(R.id.frameExplorePage, fragment);
         fragmentTransaction.commit();
-        ServicesPageFragment.title = title;
+        ExplorePageFragment.title = title;
     }
 
     private void bottomNav(){
@@ -103,10 +104,10 @@ public class ServicesPage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        navExplore.setOnClickListener(new View.OnClickListener() {
+        navServices.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ExplorePage.class);
+                Intent intent = new Intent(getApplicationContext(), ServicesPage.class);
                 startActivity(intent);
             }
         });

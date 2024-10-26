@@ -2,6 +2,7 @@ package com.android.luxevista.User;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
@@ -25,6 +26,7 @@ public class HomePage extends AppCompatActivity {
     private TabLayout tabLayout;
     private FrameLayout frameLayout;
     private LinearLayout navRooms, navServices, navExplore, navProfile;
+    private boolean doubleBackToExitPressedOnce = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +81,19 @@ public class HomePage extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 2000);
+    }
+
     private void fragmentImplementation(Fragment fragment, String title){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -92,6 +107,13 @@ public class HomePage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ServicesPage.class);
+                startActivity(intent);
+            }
+        });
+        navExplore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ExplorePage.class);
                 startActivity(intent);
             }
         });

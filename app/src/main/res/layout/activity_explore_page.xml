@@ -33,7 +33,7 @@
                 android:fontFamily="@font/main_title"
                 android:layout_gravity="center"
                 android:gravity="start"
-                android:text="Services at LuxeVista"
+                android:text="Explore LuxeVista"
                 android:textColor="@color/white"
                 android:textSize="23dp" />
 
@@ -142,7 +142,7 @@
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:fontFamily="@font/main_title"
-                    android:text="Services"
+                    android:text="Explore"
                     android:textColor="@color/white"
                     android:textSize="25dp"
                     android:textStyle="bold" />
@@ -161,22 +161,22 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:focusedByDefault="true"
-                        android:text="Spa" />
+                        android:text="Local" />
 
                     <com.google.android.material.tabs.TabItem
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Dining" />
+                        android:text="Water" />
 
                     <com.google.android.material.tabs.TabItem
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Pool" />
+                        android:text="Nightlife" />
 
                 </com.google.android.material.tabs.TabLayout>
 
                 <FrameLayout
-                    android:id="@+id/frameServicePage"
+                    android:id="@+id/frameExplorePage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -195,6 +195,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
+
 
         <LinearLayout
             android:id="@+id/linearLayoutRooms"
@@ -264,7 +265,7 @@
                 android:layout_width="match_parent"
                 android:textAlignment="center"
                 android:fontFamily="@font/main"
-                android:textColor="@color/Button"
+                android:textColor="@color/white"
                 android:textStyle="bold"
                 android:layout_height="wrap_content"
                 android:text="Services" />
@@ -301,7 +302,7 @@
                 android:layout_width="match_parent"
                 android:textAlignment="center"
                 android:fontFamily="@font/main"
-                android:textColor="@color/white"
+                android:textColor="@color/Button"
                 android:textStyle="bold"
                 android:layout_height="wrap_content"
                 android:text="Explore" />
