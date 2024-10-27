@@ -3,6 +3,7 @@ package com.android.luxevista.User;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -16,6 +17,7 @@ import com.android.luxevista.R;
 public class Login extends AppCompatActivity {
 
     private TextView txtDontHaveAccount;
+    private LinearLayout btnsignin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,15 @@ public class Login extends AppCompatActivity {
         });
 
         txtDontHaveAccount = findViewById(R.id.txtDontHaveAccount);
+        btnsignin = findViewById(R.id.btnsignin);
+
+        btnsignin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), HomePage.class);
+                startActivity(intent);
+            }
+        });
         txtDontHaveAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -25,7 +25,7 @@ public class HomePage extends AppCompatActivity {
 
     private TabLayout tabLayout;
     private FrameLayout frameLayout;
-    private LinearLayout navRooms, navServices, navExplore, navProfile;
+    private LinearLayout navRooms, navServices, navExplore, navProfile, btnProfile;
     private boolean doubleBackToExitPressedOnce = false;
 
     @Override
@@ -46,6 +46,7 @@ public class HomePage extends AppCompatActivity {
         navExplore = findViewById(R.id.linearLayoutExplore);
         navRooms = findViewById(R.id.linearLayoutRooms);
         navProfile = findViewById(R.id.linearLayoutProfile);
+        btnProfile = findViewById(R.id.btnProfile);
 
         bottomNav();
 
@@ -121,6 +122,13 @@ public class HomePage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), BookingPage.class);
+                startActivity(intent);
+            }
+        });
+        btnProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ProfilePage.class);
                 startActivity(intent);
             }
         });

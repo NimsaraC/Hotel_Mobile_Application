@@ -22,7 +22,7 @@ import com.google.android.material.tabs.TabLayout;
 public class BookingPage extends AppCompatActivity {
     private TabLayout tabLayout;
     private FrameLayout frameLayout;
-    private LinearLayout navRooms, navServices, navExplore, navProfile;
+    private LinearLayout navRooms, navServices, navExplore, btnProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,7 @@ public class BookingPage extends AppCompatActivity {
         navServices = findViewById(R.id.linearLayoutServices);
         navExplore = findViewById(R.id.linearLayoutExplore);
         navRooms = findViewById(R.id.linearLayoutRooms);
-        navProfile = findViewById(R.id.linearLayoutProfile);
+        btnProfile = findViewById(R.id.btnProfile);
 
         bottomNav();
 
@@ -111,6 +111,13 @@ public class BookingPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), HomePage.class);
+                startActivity(intent);
+            }
+        });
+        btnProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ProfilePage.class);
                 startActivity(intent);
             }
         });
