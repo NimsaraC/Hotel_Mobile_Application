@@ -19,7 +19,12 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.android.luxevista.R;
+import com.android.luxevista.Room;
+import com.android.luxevista.database.RoomDB;
 import com.google.android.material.tabs.TabLayout;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomePage extends AppCompatActivity {
 
@@ -27,6 +32,10 @@ public class HomePage extends AppCompatActivity {
     private FrameLayout frameLayout;
     private LinearLayout navRooms, navServices, navExplore, navProfile, btnProfile;
     private boolean doubleBackToExitPressedOnce = false;
+    private RoomDB roomDB;
+    private Room room;
+    private List<Room> roomList;
+    private List<Room> selectedRooms;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +47,7 @@ public class HomePage extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        roomDB = new RoomDB(this);
 
         tabLayout = findViewById(R.id.tabLayout);
         frameLayout = findViewById(R.id.frameHomepage);
@@ -50,21 +60,23 @@ public class HomePage extends AppCompatActivity {
 
         bottomNav();
 
+        roomList = roomDB.getAllRooms();
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        fragmentImplementation(new HomePageFragment(),"Ocean View");
+        fragmentImplementation(new HomePageFragment(),"Ocean View", getRooms("Ocean View"));
 
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
 
                 if(tab.getPosition() == 0){
-                    fragmentImplementation(new HomePageFragment(), "Ocean View");
+                    fragmentImplementation(new HomePageFragment(), "Ocean View", getRooms("Ocean View"));
                 }
                 if(tab.getPosition() == 1){
-                    fragmentImplementation(new HomePageFragment(), "Deluxe Garden");
+                    fragmentImplementation(new HomePageFragment(), "Deluxe Garden", getRooms("Deluxe Garden"));
                 }
                 if(tab.getPosition() == 2){
-                    fragmentImplementation(new HomePageFragment(), "Family");
+                    fragmentImplementation(new HomePageFragment(), "Family", getRooms("Family"));
                     //Toast.makeText(HomePage.this, "Room3", Toast.LENGTH_SHORT).show();
                 }
 
@@ -82,6 +94,20 @@ public class HomePage extends AppCompatActivity {
         });
     }
 
+    private List<Room> getRooms(String type) {
+        List<Room> roomList = roomDB.getAllRooms();
+        List<Room> selectedRooms = new ArrayList<>();
+
+        for (Room room : roomList) {
+            if (room.getRoomType().equals(type)) {
+                selectedRooms.add(room);
+            }
+        }
+
+        return selectedRooms;
+    }
+
+
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
@@ -95,12 +121,13 @@ public class HomePage extends AppCompatActivity {
         new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 2000);
     }
 
-    private void fragmentImplementation(Fragment fragment, String title){
+    private void fragmentImplementation(Fragment fragment, String title, List<Room> selectedRooms){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frameHomepage, fragment);
         fragmentTransaction.commit();
         HomePageFragment.title = title;
+        HomePageFragment.roomList = selectedRooms;
     }
 
     private void bottomNav(){

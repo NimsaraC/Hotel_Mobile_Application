@@ -44,7 +44,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
 
         public ImageViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.imageView); // Assume you have an ImageView in item_image layout
+            imageView = itemView.findViewById(R.id.imageView);
         }
 
         public void bind(Uri imageUri) {

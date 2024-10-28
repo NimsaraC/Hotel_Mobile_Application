@@ -1,9 +1,11 @@
 package com.android.luxevista.adminPages;
 
 import android.app.TimePickerDialog;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -29,6 +31,7 @@ import com.android.luxevista.R;
 import com.android.luxevista.Room;
 import com.android.luxevista.adapter.ImageAdapter;
 import com.android.luxevista.database.RoomDB;
+import com.android.luxevista.userPages.HomePage;
 import com.android.luxevista.userPages.Login;
 
 import java.io.File;
@@ -115,6 +118,16 @@ public class AddRoomPage extends AppCompatActivity {
         });
     }
     private void addRoomData(){
+
+        if(edtDescription.getText().toString().isEmpty()|| edtRoomSize.getText().toString().isEmpty()
+                || edtView.getText().toString().isEmpty()&& edtOccupancy.getText().toString().isEmpty() || edtAmenities.getText().toString().isEmpty()
+                || edtAdditionalService.getText().toString().isEmpty() || edtCheckIn.getText().toString().isEmpty()|| edtCheckOut.getText().toString().isEmpty()
+                ||edtCancellationPolicy.getText().toString().isEmpty()
+                || edtPrice.getText().toString().isEmpty()){
+            Toast.makeText(AddRoomPage.this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         String rType = roomType.getSelectedItem().toString();
         String Description = edtDescription.getText().toString();
         String roomSize = edtRoomSize.getText().toString();
@@ -152,7 +165,7 @@ public class AddRoomPage extends AppCompatActivity {
         Long result = db.insertRoom(room);
         if (result != -1) {
             Toast.makeText(getApplicationContext(), "Room added successfully", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(getApplicationContext(), Login.class);
+            Intent intent = new Intent(getApplicationContext(), HomePage.class);
             startActivity(intent);
         } else {
             Toast.makeText(getApplicationContext(), "Room addition failed", Toast.LENGTH_SHORT).show();
@@ -177,7 +190,7 @@ public class AddRoomPage extends AppCompatActivity {
                 imageUris.add(String.valueOf(selectedImageUri));
                 imageViewPreview.setImageURI(selectedImageUri);
                 imageUri = selectedImageUri;
-                saveImageToStorage(selectedImageUri);
+                saveImageToInternalStorage(selectedImageUri);
             }
         } else if (requestCode == PICK_IMAGES_REQUEST && resultCode == RESULT_OK) {
             if (data.getClipData() != null) {
@@ -185,60 +198,52 @@ public class AddRoomPage extends AppCompatActivity {
                 for (int i = 0; i < count; i++) {
                     Uri imageUri = data.getClipData().getItemAt(i).getUri();
                     imageAdapter.notifyDataSetChanged();
-                    saveImageToStorage(imageUri);
+                    saveImageToInternalStorage(imageUri);
                 }
             } else if (data.getData() != null) {
                 Uri imageUri = data.getData();
                 imageUris.add(String.valueOf(imageUri));
                 imageAdapter.notifyDataSetChanged();
-                saveImageToStorage(imageUri);
+                saveImageToInternalStorage(imageUri);
             }
         }
     }
-
-    private String saveImageToStorage(Uri imageUri) {
-        try {
-            Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
-            File storageDir = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "LuxeVista");
-            if (!storageDir.exists()) {
-                storageDir.mkdirs();
-            }
-
-            String fileName = "image_" + System.currentTimeMillis() + ".jpg";
-            File file = new File(storageDir, fileName);
-
-            FileOutputStream outStream = new FileOutputStream(file);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outStream);
-            outStream.flush();
-            outStream.close();
-
-            Toast.makeText(this, "Image saved successfully", Toast.LENGTH_SHORT).show();
-            return String.valueOf(imageUri);
-        } catch (IOException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "Failed to save image", Toast.LENGTH_SHORT).show();
-        }
-        return "";
-    }
-
-    private String saveImageToInternalStorage() {
+    private String saveImageToInternalStorage(Uri imageUri) {
         if (imageUri == null) return "";
 
         try {
             Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
             String filename = UUID.randomUUID().toString() + ".jpg";
-            File file = new File(getFilesDir(), filename);
 
-            try (OutputStream outputStream = new FileOutputStream(file)) {
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                // Use MediaStore API for Android 11+ (API 30+)
+                ContentValues values = new ContentValues();
+                values.put(MediaStore.Images.Media.DISPLAY_NAME, filename);
+                values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
+                values.put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/LuxeVista");
+
+                Uri uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+                if (uri != null) {
+                    try (OutputStream outputStream = getContentResolver().openOutputStream(uri)) {
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+                    }
+                    return uri.toString();
+                }
+            } else {
+                // Save to internal storage directly for Android 10 and below
+                File file = new File(getFilesDir(), filename);
+                try (OutputStream outputStream = new FileOutputStream(file)) {
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+                }
+                return file.getAbsolutePath();  // Return the internal file path
             }
 
-            return file.getAbsolutePath();
         } catch (IOException e) {
             Toast.makeText(this, "Failed to save image.", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
-            return "";
         }
+
+        return "";
     }
 
     private void timeSelect(){

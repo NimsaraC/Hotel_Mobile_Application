@@ -145,4 +145,49 @@ public class RoomDB extends SQLiteOpenHelper {
         db.close();
         return room;
     }
+
+    public List<Room> getAllRooms() {
+        List<Room> roomList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "SELECT * FROM " + TABLE_NAME;
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                List<String> additionalImages = new ArrayList<>();
+                String imagesJson = cursor.getString(cursor.getColumnIndexOrThrow(ADDITIONAL_IMAGES));
+                if (imagesJson != null && !imagesJson.isEmpty()) {
+                    additionalImages = new Gson().fromJson(imagesJson, ArrayList.class);
+                }
+
+                Room room = new Room(
+                        cursor.getString(cursor.getColumnIndexOrThrow(ROOM_ID)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(ROOM_TYPE)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(DESCRIPTION)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(ROOM_SIZE)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(BED_TYPE)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(VIEW)),
+                        cursor.getInt(cursor.getColumnIndexOrThrow(OCCUPANCY)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(AMENITIES)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(ADDITIONAL_SERVICES)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(CHECKIN_TIME)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(CHECKOUT_TIME)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(CANCELLATION_POLICY)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(NO_SMOKING_POLICY)),
+                        cursor.getDouble(cursor.getColumnIndexOrThrow(RATE)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(COVER_IMAGE)),
+                        additionalImages
+                );
+
+                roomList.add(room);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+
+        return roomList;
+    }
+
 }
