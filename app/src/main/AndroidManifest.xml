@@ -13,6 +13,9 @@
         android:theme="@style/Theme.LuxeVista"
         tools:targetApi="31">
         <activity
+            android:name=".adminPages.AddRoomPage"
+            android:exported="false" />
+        <activity
             android:name=".userPages.ProfilePage"
             android:exported="false" />
         <activity
@@ -26,9 +29,6 @@
             android:exported="false" />
         <activity
             android:name=".userPages.HomePage"
-            android:exported="false" />
-        <activity
-            android:name=".userPages.UserMain"
             android:exported="false" />
         <activity
             android:name=".userPages.Login"

@@ -12,7 +12,7 @@ import com.android.luxevista.User;
 
 public class UserDB extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "UserDB.db";
+    private static final String DATABASE_NAME = "UserDB";
     private static final int DATABASE_VERSION = 1;
     private static final String TABLE_NAME = "User";
     private static final String USER_ID = "id";

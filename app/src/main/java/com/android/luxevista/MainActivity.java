@@ -11,6 +11,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.android.luxevista.adminPages.AddRoomPage;
 import com.android.luxevista.userPages.Login;
 
 public class MainActivity extends AppCompatActivity {
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Login.class);
+                Intent intent = new Intent(MainActivity.this, AddRoomPage.class);
                 startActivity(intent);
             }
         });
