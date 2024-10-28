@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".User.HomePage">
+    tools:context=".userPages.HomePage">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -49,7 +49,7 @@
                             android:orientation="vertical">
 
                             <ImageView
-                                android:id="@+id/imageView2"
+                                android:id="@+id/profilePic"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:scaleType="centerCrop"
@@ -58,7 +58,7 @@
                     </androidx.cardview.widget.CardView>
 
                     <TextView
-                        android:id="@+id/textView5"
+                        android:id="@+id/profileName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Full Name"
@@ -69,7 +69,7 @@
                         android:textAlignment="center"/>
 
                     <TextView
-                        android:id="@+id/textView9"
+                        android:id="@+id/profileEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="luxevista@gmail.com"
@@ -334,13 +334,14 @@
                         android:layout_width="match_parent"
                         android:layout_marginTop="5dp"
                         android:layout_marginStart="20dp"
-                        android:layout_marginEnd="30dp"
+                        android:layout_marginEnd="20dp"
                         android:layout_marginBottom="20dp"
                         app:cardCornerRadius="20dp"
                         app:cardElevation="5dp"
                         android:layout_height="80dp">
 
                         <LinearLayout
+                            android:id="@+id/btnSignout"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@color/card"

@@ -13,28 +13,28 @@
         android:theme="@style/Theme.LuxeVista"
         tools:targetApi="31">
         <activity
-            android:name=".User.ProfilePage"
+            android:name=".userPages.ProfilePage"
             android:exported="false" />
         <activity
-            android:name=".User.BookingPage"
+            android:name=".userPages.BookingPage"
             android:exported="false" />
         <activity
-            android:name=".User.ExplorePage"
+            android:name=".userPages.ExplorePage"
             android:exported="false" />
         <activity
-            android:name=".User.ServicesPage"
+            android:name=".userPages.ServicesPage"
             android:exported="false" />
         <activity
-            android:name=".User.HomePage"
+            android:name=".userPages.HomePage"
             android:exported="false" />
         <activity
-            android:name=".User.UserMain"
+            android:name=".userPages.UserMain"
             android:exported="false" />
         <activity
-            android:name=".User.Login"
+            android:name=".userPages.Login"
             android:exported="false" />
         <activity
-            android:name=".User.Registration"
+            android:name=".userPages.Registration"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

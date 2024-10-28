@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:background="@color/background"
 
-    tools:context=".User.ExplorePageFragment">
+    tools:context=".userPages.ExplorePageFragment">
 
     <TextView
         android:id="@+id/exploreTitle"

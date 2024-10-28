@@ -1,4 +1,4 @@
-package com.android.luxevista.User;
+package com.android.luxevista.userPages;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,46 +19,49 @@ import androidx.fragment.app.FragmentTransaction;
 import com.android.luxevista.R;
 import com.google.android.material.tabs.TabLayout;
 
-public class BookingPage extends AppCompatActivity {
+public class ServicesPage extends AppCompatActivity {
+
     private TabLayout tabLayout;
     private FrameLayout frameLayout;
-    private LinearLayout navRooms, navServices, navExplore, btnProfile;
+    private LinearLayout navRooms, navServices, navExplore, navProfile, btnProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_booking_page);
+        setContentView(R.layout.activity_services_page);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        tabLayout = findViewById(R.id.tabLayout);
+        tabLayout = findViewById(R.id.tabLayoutService);
+        frameLayout = findViewById(R.id.frameServicePage);
 
         navServices = findViewById(R.id.linearLayoutServices);
         navExplore = findViewById(R.id.linearLayoutExplore);
         navRooms = findViewById(R.id.linearLayoutRooms);
+        navProfile = findViewById(R.id.linearLayoutProfile);
         btnProfile = findViewById(R.id.btnProfile);
 
         bottomNav();
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        fragmentImplementation(new BookingPageFragment(),"Upcoming Booking");
+        fragmentImplementation(new ServicesPageFragment(),"Spa & Wellness");
 
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
 
                 if(tab.getPosition() == 0){
-                    fragmentImplementation(new BookingPageFragment(), "Upcoming Booking");
+                    fragmentImplementation(new ServicesPageFragment(), "Spa & Wellness");
                 }
                 if(tab.getPosition() == 1){
-                    fragmentImplementation(new BookingPageFragment(), "Completed Booking");
+                    fragmentImplementation(new ServicesPageFragment(), "Dining Reservations");
                 }
                 if(tab.getPosition() == 2){
-                    fragmentImplementation(new BookingPageFragment(), "Canceled Booking");
+                    fragmentImplementation(new ServicesPageFragment(), "Poolside Cabanas");
                     //Toast.makeText(HomePage.this, "Room3", Toast.LENGTH_SHORT).show();
                 }
 
@@ -84,19 +87,20 @@ public class BookingPage extends AppCompatActivity {
         finish();
     }
 
+
     private void fragmentImplementation(Fragment fragment, String title){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frameBookingPage, fragment);
+        fragmentTransaction.replace(R.id.frameServicePage, fragment);
         fragmentTransaction.commit();
-        BookingPageFragment.title = title;
+        ServicesPageFragment.title = title;
     }
 
     private void bottomNav(){
-        navServices.setOnClickListener(new View.OnClickListener() {
+        navRooms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ServicesPage.class);
+                Intent intent = new Intent(getApplicationContext(), HomePage.class);
                 startActivity(intent);
             }
         });
@@ -107,10 +111,10 @@ public class BookingPage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        navRooms.setOnClickListener(new View.OnClickListener() {
+        navProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), HomePage.class);
+                Intent intent = new Intent(getApplicationContext(), BookingPage.class);
                 startActivity(intent);
             }
         });

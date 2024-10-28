@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:background="@color/background"
 
-    tools:context=".User.HomePageFragment">
+    tools:context=".userPages.HomePageFragment">
 
     <TextView
         android:id="@+id/roomTitle"

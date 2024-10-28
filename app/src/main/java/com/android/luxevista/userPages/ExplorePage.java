@@ -1,4 +1,4 @@
-package com.android.luxevista.User;
+package com.android.luxevista.userPages;
 
 import android.content.Intent;
 import android.os.Bundle;

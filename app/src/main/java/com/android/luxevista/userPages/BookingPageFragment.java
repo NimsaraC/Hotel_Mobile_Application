@@ -1,4 +1,4 @@
-package com.android.luxevista.User;
+package com.android.luxevista.userPages;
 
 import android.os.Bundle;
 
@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.android.luxevista.R;
 
-public class HomePageFragment extends Fragment {
+public class BookingPageFragment extends Fragment {
 
     private TextView txttitle;
     public static String title = "";
@@ -19,12 +19,11 @@ public class HomePageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_home_page, container, false);
+        View view = inflater.inflate(R.layout.fragment_booking_page, container, false);
 
-        txttitle = view.findViewById(R.id.roomTitle);
+        txttitle = view.findViewById(R.id.bookingTitle);
         txttitle.setText(title);
 
         return  view;
-
     }
 }

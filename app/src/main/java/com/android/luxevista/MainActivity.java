@@ -3,7 +3,6 @@ package com.android.luxevista;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -12,9 +11,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.android.luxevista.User.HomePage;
-import com.android.luxevista.User.Login;
-import com.android.luxevista.User.Registration;
+import com.android.luxevista.userPages.Login;
 
 public class MainActivity extends AppCompatActivity {
 
