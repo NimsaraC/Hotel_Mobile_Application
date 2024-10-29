@@ -10,6 +10,7 @@ import com.android.luxevista.Room;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class RoomDB extends SQLiteOpenHelper {
@@ -69,6 +70,7 @@ public class RoomDB extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    /*
     public Long insertRoom(Room room) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -104,9 +106,31 @@ public class RoomDB extends SQLiteOpenHelper {
         }
 
         return result;
-    }
+    }*/
+    public Long insertRoom(Room room) {
+    SQLiteDatabase db = this.getWritableDatabase();
+    ContentValues values = new ContentValues();
+        values.put(ROOM_TYPE, room.getRoomType());
+        values.put(DESCRIPTION, room.getDescription());
+        values.put(ROOM_SIZE, room.getRoomSize());
+        values.put(BED_TYPE, room.getBedType());
+        values.put(VIEW, room.getView());
+        values.put(OCCUPANCY, room.getOccupancy());
+        values.put(AMENITIES, room.getAmenities());
+        values.put(ADDITIONAL_SERVICES, room.getAdditionalServices());
+        values.put(CHECKIN_TIME, room.getCheckInTime());
+        values.put(CHECKOUT_TIME, room.getCheckOutTime());
+        values.put(CANCELLATION_POLICY, room.getCancellationPolicy());
+        values.put(NO_SMOKING_POLICY, room.getNoSmokingPolicy());
+        values.put(RATE, room.getRate());
+        values.put(COVER_IMAGE, room.getCoverImage());
+        values.put(ADDITIONAL_IMAGES, room.getAdditionalImages().toString());
 
-
+    Long result = db.insert(TABLE_NAME, null, values);
+        db.close();
+        return result;
+}
+/*
     public Room getRoomById(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         Room room = null;
@@ -144,8 +168,43 @@ public class RoomDB extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return room;
+    }*/
+
+    public Room getRoomById(int roomId) {
+        Room room = null;
+
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + ROOM_ID + " = ?";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(roomId)});
+
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                room = new Room();
+                room.setRoomType(cursor.getString(cursor.getColumnIndexOrThrow(ROOM_TYPE)));
+                room.setDescription(cursor.getString(cursor.getColumnIndexOrThrow(DESCRIPTION)));
+                room.setRoomSize(cursor.getString(cursor.getColumnIndexOrThrow(ROOM_SIZE)));
+                room.setBedType(cursor.getString(cursor.getColumnIndexOrThrow(BED_TYPE)));
+                room.setView(cursor.getString(cursor.getColumnIndexOrThrow(VIEW)));
+                room.setOccupancy(cursor.getInt(cursor.getColumnIndexOrThrow(OCCUPANCY)));
+                room.setAmenities(cursor.getString(cursor.getColumnIndexOrThrow(AMENITIES)));
+                room.setAdditionalServices(cursor.getString(cursor.getColumnIndexOrThrow(ADDITIONAL_SERVICES)));
+                room.setCheckInTime(cursor.getString(cursor.getColumnIndexOrThrow(CHECKIN_TIME)));
+                room.setCheckOutTime(cursor.getString(cursor.getColumnIndexOrThrow(CHECKOUT_TIME)));
+                room.setCancellationPolicy(cursor.getString(cursor.getColumnIndexOrThrow(CANCELLATION_POLICY)));
+                room.setNoSmokingPolicy(cursor.getString(cursor.getColumnIndexOrThrow(NO_SMOKING_POLICY)));
+                room.setRate(cursor.getDouble(cursor.getColumnIndexOrThrow(RATE)));
+                room.setCoverImage(cursor.getString(cursor.getColumnIndexOrThrow(COVER_IMAGE)));
+                String additionalImagesString = cursor.getString(cursor.getColumnIndexOrThrow(ADDITIONAL_IMAGES));
+                room.setAdditionalImages(new ArrayList<>(Arrays.asList(additionalImagesString.split(","))));
+            }
+            cursor.close();
+        }
+
+        db.close();
+        return room;
     }
 
+    /*
     public List<Room> getAllRooms() {
         List<Room> roomList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -188,6 +247,44 @@ public class RoomDB extends SQLiteOpenHelper {
         db.close();
 
         return roomList;
+    }*/
+public List<Room> getAllRooms() {
+    List<Room> roomList = new ArrayList<>();
+
+    String query = "SELECT * FROM " + TABLE_NAME;
+    SQLiteDatabase db = this.getReadableDatabase();
+    Cursor cursor = db.rawQuery(query, null);
+
+    if (cursor != null) {
+        if (cursor.moveToFirst()) {
+            do {
+                Room room = new Room();
+                room.setRoomType(cursor.getString(cursor.getColumnIndexOrThrow(ROOM_TYPE)));
+                room.setDescription(cursor.getString(cursor.getColumnIndexOrThrow(DESCRIPTION)));
+                room.setRoomSize(cursor.getString(cursor.getColumnIndexOrThrow(ROOM_SIZE)));
+                room.setBedType(cursor.getString(cursor.getColumnIndexOrThrow(BED_TYPE)));
+                room.setView(cursor.getString(cursor.getColumnIndexOrThrow(VIEW)));
+                room.setOccupancy(Integer.parseInt(cursor.getString(cursor.getColumnIndexOrThrow(OCCUPANCY))));
+                room.setAmenities(cursor.getString(cursor.getColumnIndexOrThrow(AMENITIES)));
+                room.setAdditionalServices(cursor.getString(cursor.getColumnIndexOrThrow(ADDITIONAL_SERVICES)));
+                room.setCheckInTime(cursor.getString(cursor.getColumnIndexOrThrow(CHECKIN_TIME)));
+                room.setCheckOutTime(cursor.getString(cursor.getColumnIndexOrThrow(CHECKOUT_TIME)));
+                room.setCancellationPolicy(cursor.getString(cursor.getColumnIndexOrThrow(CANCELLATION_POLICY)));
+                room.setNoSmokingPolicy(cursor.getString(cursor.getColumnIndexOrThrow(NO_SMOKING_POLICY)));
+                room.setRate(cursor.getDouble(cursor.getColumnIndexOrThrow(RATE)));
+                room.setCoverImage(cursor.getString(cursor.getColumnIndexOrThrow(COVER_IMAGE)));
+                String additionalImagesString = cursor.getString(cursor.getColumnIndexOrThrow(ADDITIONAL_IMAGES));
+                room.setAdditionalImages(new ArrayList<>(Arrays.asList(additionalImagesString.split(","))));
+
+                roomList.add(room);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
     }
+
+    db.close();
+    return roomList;
+}
+
 
 }

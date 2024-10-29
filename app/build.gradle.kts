@@ -40,6 +40,7 @@ dependencies {
     implementation(libs.recyclerview)
     implementation ("com.squareup.picasso:picasso:2.71828")
     implementation ("com.google.code.gson:gson:2.8.9")
+    implementation ("androidx.viewpager2:viewpager2:1.0.0")
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

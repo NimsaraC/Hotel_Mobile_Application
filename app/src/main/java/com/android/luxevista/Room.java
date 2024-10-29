@@ -1,9 +1,12 @@
 package com.android.luxevista;
 
+import android.net.Uri;
+
 import java.util.List;
 
 public class Room {
 
+    public List<Uri> imageUriList;
     private String roomId;
     private String roomType;
     private String description;
@@ -59,6 +62,10 @@ public class Room {
         this.rate = rate;
         this.coverImage = coverImage;
         this.additionalImages = additionalImages;
+    }
+
+    public Room() {
+
     }
 
     public String getRoomId() {
