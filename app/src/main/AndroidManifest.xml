@@ -4,7 +4,6 @@
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -15,7 +14,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LuxeVista"
         tools:targetApi="31">
-
+        <activity
+            android:name=".adminPages.AddExplorePage"
+            android:exported="false" />
+        <activity
+            android:name=".adminPages.AddPoolServicePage"
+            android:exported="false" />
+        <activity
+            android:name=".adminPages.AddDiningServicePage"
+            android:exported="false" />
+        <activity
+            android:name=".adminPages.AddSpaServicePage"
+            android:exported="false" />
+        <activity
+            android:name=".adminPages.AdminHomePageTemp"
+            android:exported="false" />
         <activity
             android:name=".adminPages.AddRoomPage"
             android:exported="false" />
@@ -45,6 +58,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
