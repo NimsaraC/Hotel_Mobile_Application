@@ -13,4 +13,13 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="TextStyleCalender">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">@color/Button</item>
+        <item name="android:fontFamily">@font/main</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+
+
 </resources>

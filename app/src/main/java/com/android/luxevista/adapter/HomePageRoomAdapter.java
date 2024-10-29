@@ -1,8 +1,8 @@
 package com.android.luxevista.adapter;
 
-import static java.security.AccessController.getContext;
-
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,8 +17,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.luxevista.R;
 import com.android.luxevista.Room;
 import com.android.luxevista.database.RoomDB;
+import com.android.luxevista.userPages.RoomDetailsPage;
 import com.squareup.picasso.Picasso;
 
+import java.security.AccessController;
 import java.util.List;
 
 public class HomePageRoomAdapter extends RecyclerView.Adapter<HomePageRoomAdapter.ViewHolder> {
@@ -55,7 +57,10 @@ public class HomePageRoomAdapter extends RecyclerView.Adapter<HomePageRoomAdapte
         holder.roomBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                int id = room.getRoomId();
+                Intent intent = new Intent(context, RoomDetailsPage.class);
+                intent.putExtra("roomId", id);
+                context.startActivity(intent);
             }
         });
     }

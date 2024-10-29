@@ -15,6 +15,7 @@ import com.android.luxevista.adminPages.AddRoomPage;
 import com.android.luxevista.adminPages.AdminHomePageTemp;
 import com.android.luxevista.userPages.HomePage;
 import com.android.luxevista.userPages.Login;
+import com.android.luxevista.userPages.RoomDetailsPage;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, YourActivity.class);
+                Intent intent = new Intent(MainActivity.this, HomePage.class);
                 startActivity(intent);
             }
         });

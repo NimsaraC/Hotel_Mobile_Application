@@ -180,6 +180,7 @@ public class RoomDB extends SQLiteOpenHelper {
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 room = new Room();
+                room.setRoomId(cursor.getInt(cursor.getColumnIndexOrThrow(ROOM_ID)));
                 room.setRoomType(cursor.getString(cursor.getColumnIndexOrThrow(ROOM_TYPE)));
                 room.setDescription(cursor.getString(cursor.getColumnIndexOrThrow(DESCRIPTION)));
                 room.setRoomSize(cursor.getString(cursor.getColumnIndexOrThrow(ROOM_SIZE)));
@@ -259,6 +260,7 @@ public List<Room> getAllRooms() {
         if (cursor.moveToFirst()) {
             do {
                 Room room = new Room();
+                room.setRoomId(cursor.getInt(cursor.getColumnIndexOrThrow(ROOM_ID)));
                 room.setRoomType(cursor.getString(cursor.getColumnIndexOrThrow(ROOM_TYPE)));
                 room.setDescription(cursor.getString(cursor.getColumnIndexOrThrow(DESCRIPTION)));
                 room.setRoomSize(cursor.getString(cursor.getColumnIndexOrThrow(ROOM_SIZE)));

@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background"
+    tools:context=".userPages.RoomDetailsPage">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/card"
+            android:orientation="horizontal"
+            android:padding="15dp">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_marginTop="2dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/main_title"
+                android:layout_gravity="center"
+                android:gravity="start"
+                android:text="Explore LuxeVista"
+                android:textColor="@color/white"
+                android:textSize="23dp" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                app:cardCornerRadius="50dp"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:id="@+id/btnProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/user" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" >
+
+            <ImageView
+                android:id="@+id/coverImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/home_screen" />
+        </androidx.cardview.widget.CardView>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:translationZ="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="200dp"
+                    android:background="@drawable/topcorner_card"
+                    android:orientation="vertical"
+                    android:elevation="20dp"
+                    android:paddingTop="30dp">
+
+<!--                    RoomType-->
+                    <TextView
+                        android:id="@+id/txtRoomType"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/main_title"
+                        android:text="RoomType"
+                        android:textAlignment="center"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:textColor="@color/white"
+                        android:textSize="30dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+<!--                        RoomPrice-->
+                        <TextView
+                            android:id="@+id/txtRoomPrice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/main_title"
+                            android:layout_marginStart="20dp"
+                            android:text="$100"
+                            android:layout_weight="3"
+                            android:layout_marginTop="10dp"
+                            android:textAlignment="textEnd"
+                            android:textColor="@color/Button"
+                            android:textSize="25dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/main"
+                            android:layout_marginStart="10dp"
+                            android:text="per Night"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="15dp"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/Button"
+                            android:textSize="15dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="20dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center"
+                            android:textSize="20dp"
+                            android:text="Room Details"
+                            android:textColor="@color/Button"
+                            android:fontFamily="@font/title"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/text_filed"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="110dp"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/main"
+                                android:text="Room Size: "
+                                android:layout_marginEnd="10dp"
+                                android:textColor="@color/white"
+                                android:textSize="15dp" />
+<!--RoomSize-->
+                            <TextView
+                                android:id="@+id/txtRoomSize"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/title"
+                                android:text="$100 / Night"
+                                android:textColor="@color/white"
+                                android:textSize="18dp" />
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="110dp"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/main"
+                                android:text="Room View: "
+                                android:layout_marginEnd="10dp"
+                                android:textColor="@color/white"
+                                android:textSize="15dp" />
+<!--RoomView-->
+                            <TextView
+                                android:id="@+id/txtRoomView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/title"
+                                android:inputType="textMultiLine"
+                                android:maxLines="5"
+                                android:text="$100 / Night"
+                                android:textColor="@color/white"
+                                android:textSize="18dp" />
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="110dp"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/main"
+                                android:text="Occupancy: "
+                                android:layout_marginEnd="10dp"
+                                android:textColor="@color/white"
+                                android:textSize="15dp" />
+<!--                            RoomOccupancy-->
+                            <TextView
+                                android:id="@+id/txtRoomOccupancy"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/title"
+                                android:text="Up to 3 guests"
+                                android:textColor="@color/white"
+                                android:textSize="18dp" />
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="110dp"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/main"
+                                android:text="Amenities: "
+                                android:layout_marginEnd="10dp"
+                                android:textColor="@color/white"
+                                android:textSize="15dp" />
+<!--                            RoomAmenities-->
+                            <TextView
+                                android:id="@+id/txtRoomAmenities"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/title"
+                                android:text="Up to 3 guests"
+                                android:textColor="@color/white"
+                                android:textSize="18dp" />
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="110dp"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/main"
+                                android:text="Services: "
+                                android:layout_marginEnd="10dp"
+                                android:textColor="@color/white"
+                                android:textSize="15dp" />
+<!--                            RoomServices-->
+                            <TextView
+                                android:id="@+id/txtRoomServices"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/title"
+                                android:text="Up to 3 guests"
+                                android:textColor="@color/white"
+                                android:textSize="18dp" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/background"
+                        android:padding="20dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center"
+                            android:textSize="20dp"
+                            android:text="Room Policies"
+                            android:textColor="@color/Button"
+                            android:fontFamily="@font/title"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/text_filed"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="90dp"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/main"
+                                android:text="Check-In: "
+                                android:layout_marginEnd="10dp"
+                                android:textColor="@color/white"
+                                android:textSize="15dp" />
+<!--                            CheckIn-->
+                            <TextView
+                                android:id="@+id/txtCheckIn"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/title"
+                                android:text="$100 / Night"
+                                android:textColor="@color/white"
+                                android:textSize="18dp" />
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="90dp"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/main"
+                                android:text="Check-Out: "
+                                android:layout_marginEnd="10dp"
+                                android:textColor="@color/white"
+                                android:textSize="15dp" />
+<!--                            RoomCheckOut-->
+                            <TextView
+                                android:id="@+id/txtRoomCheckOut"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/title"
+                                android:inputType="textMultiLine"
+                                android:maxLines="5"
+                                android:text="$100 / Night"
+                                android:textColor="@color/white"
+                                android:textSize="18dp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_marginTop="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/main"
+                                android:text="Cancellation Policy: "
+                                android:layout_marginEnd="10dp"
+                                android:textColor="@color/white"
+                                android:textSize="15dp" />
+
+                        </LinearLayout>
+<!--                        RoomCancellation-->
+                        <TextView
+                            android:id="@+id/txtRoomCancellation"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/title"
+                            android:text="Free cancellation up to 48 hours before check-in. Late cancellations may incur a fee."
+                            android:textColor="@color/white"
+                            android:textSize="18dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_marginTop="20dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/main"
+                                android:text="Smoking Policy: "
+                                android:layout_marginEnd="10dp"
+                                android:textColor="@color/white"
+                                android:textSize="15dp" />
+
+                        </LinearLayout>
+<!--                        RoomSmoking-->
+                        <TextView
+                            android:id="@+id/txtRoomSmoking"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/title"
+                            android:text="Non-smoking room."
+                            android:textColor="@color/white"
+                            android:textSize="18dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/background"
+                        android:padding="20dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center"
+                            android:textSize="20dp"
+                            android:text="Availability Calendar"
+                            android:textColor="@color/Button"
+                            android:fontFamily="@font/title"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/text_filed"
+                        android:orientation="vertical">
+
+                        <CalendarView
+                            android:id="@+id/calendarView"
+                            android:weekDayTextAppearance="@style/TextStyleCalender"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"/>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/background"
+                        android:padding="20dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center"
+                            android:textSize="20dp"
+                            android:text="Room Images"
+                            android:textColor="@color/Button"
+                            android:fontFamily="@font/title"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:background="@color/card"
+                        android:orientation="vertical">
+
+                    </LinearLayout>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="15dp"
+                        android:layout_margin="20dp">
+
+                        <LinearLayout
+                            android:id="@+id/btnBookNow"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/Button"
+                            android:layout_gravity="center"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:fontFamily="@font/main_title"
+                                android:text="Book Now"
+                                android:textColor="@color/background"
+                                android:textSize="30dp" />
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

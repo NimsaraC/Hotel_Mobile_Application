@@ -7,7 +7,7 @@ import java.util.List;
 public class Room {
 
     public List<Uri> imageUriList;
-    private String roomId;
+    private int roomId;
     private String roomType;
     private String description;
     private String roomSize;
@@ -42,7 +42,7 @@ public class Room {
         this.additionalImages = additionalImages;
     }
 
-    public Room(String roomId, String roomType, String description, String roomSize, String bedType,
+    public Room(int roomId, String roomType, String description, String roomSize, String bedType,
                 String view, int occupancy, String amenities, String additionalServices, String checkInTime,
                 String checkOutTime, String cancellationPolicy, String noSmokingPolicy, double rate,
                 String coverImage, List<String> additionalImages) {
@@ -68,11 +68,11 @@ public class Room {
 
     }
 
-    public String getRoomId() {
+    public int getRoomId() {
         return roomId;
     }
 
-    public void setRoomId(String roomId) {
+    public void setRoomId(int roomId) {
         this.roomId = roomId;
     }
 

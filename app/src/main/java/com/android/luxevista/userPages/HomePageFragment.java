@@ -37,7 +37,7 @@ public class HomePageFragment extends Fragment {
 
         recyclerView.setLayoutManager(layoutManager);
 
-        adapter = new HomePageRoomAdapter(context, roomList);
+        adapter = new HomePageRoomAdapter(getContext(), roomList);
         recyclerView.setAdapter(adapter);
 
         txttitle = view.findViewById(R.id.roomTitle);
