@@ -16,14 +16,22 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.android.luxevista.LuxeService;
 import com.android.luxevista.R;
+import com.android.luxevista.database.ServicesDB;
 import com.google.android.material.tabs.TabLayout;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ServicesPage extends AppCompatActivity {
 
     private TabLayout tabLayout;
     private FrameLayout frameLayout;
     private LinearLayout navRooms, navServices, navExplore, navProfile, btnProfile;
+    private LuxeService service;
+    private ServicesDB db;
+    private List<LuxeService> serviceList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +43,9 @@ public class ServicesPage extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        db = new ServicesDB(this);
+        serviceList = db.getAllServices();
 
         tabLayout = findViewById(R.id.tabLayoutService);
         frameLayout = findViewById(R.id.frameServicePage);
@@ -48,20 +59,20 @@ public class ServicesPage extends AppCompatActivity {
         bottomNav();
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        fragmentImplementation(new ServicesPageFragment(),"Spa & Wellness");
+        fragmentImplementation(new ServicesPageFragment(),"Spa & Wellness", getServices("Spa & Wellness"));
 
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
 
                 if(tab.getPosition() == 0){
-                    fragmentImplementation(new ServicesPageFragment(), "Spa & Wellness");
+                    fragmentImplementation(new ServicesPageFragment(), "Spa service", getServices("Spa & Wellness"));
                 }
                 if(tab.getPosition() == 1){
-                    fragmentImplementation(new ServicesPageFragment(), "Dining Reservations");
+                    fragmentImplementation(new ServicesPageFragment(), "Dining Reservations", getServices("Dining service"));
                 }
                 if(tab.getPosition() == 2){
-                    fragmentImplementation(new ServicesPageFragment(), "Poolside Cabanas");
+                    fragmentImplementation(new ServicesPageFragment(), "Poolside Cabanas", getServices("Pool service"));
                     //Toast.makeText(HomePage.this, "Room3", Toast.LENGTH_SHORT).show();
                 }
 
@@ -78,6 +89,18 @@ public class ServicesPage extends AppCompatActivity {
             }
         });
     }
+
+    private List<LuxeService> getServices(String type){
+        List<LuxeService> selectedServices = new ArrayList<>();
+        for (LuxeService service : serviceList){
+            if (service.getServiceTitle().equals(type)){
+                selectedServices.add(service);
+            }
+        }
+
+        return selectedServices;
+    }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -88,12 +111,13 @@ public class ServicesPage extends AppCompatActivity {
     }
 
 
-    private void fragmentImplementation(Fragment fragment, String title){
+    private void fragmentImplementation(Fragment fragment, String title, List<LuxeService> selectedServices){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frameServicePage, fragment);
         fragmentTransaction.commit();
         ServicesPageFragment.title = title;
+        ServicesPageFragment.serviceList = selectedServices;
     }
 
     private void bottomNav(){

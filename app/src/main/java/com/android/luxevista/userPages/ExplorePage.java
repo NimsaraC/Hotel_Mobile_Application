@@ -16,14 +16,22 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.android.luxevista.Explore;
 import com.android.luxevista.R;
+import com.android.luxevista.database.ExploreDB;
 import com.google.android.material.tabs.TabLayout;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ExplorePage extends AppCompatActivity {
 
     private TabLayout tabLayout;
     private FrameLayout frameLayout;
-    private LinearLayout navRooms, navServices, navExplore, navProfile, btnProfile;
+    private LinearLayout navRooms, navServices, navProfile, btnProfile;
+    private Explore explore;
+    private ExploreDB db;
+    private List<Explore> exploreList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +44,14 @@ public class ExplorePage extends AppCompatActivity {
             return insets;
         });
 
+
+        db = new ExploreDB(this);
+        exploreList = db.getAllExplores();
+
         tabLayout = findViewById(R.id.tabLayoutService);
         frameLayout = findViewById(R.id.frameExplorePage);
 
         navServices = findViewById(R.id.linearLayoutServices);
-        navExplore = findViewById(R.id.linearLayoutExplore);
         navRooms = findViewById(R.id.linearLayoutRooms);
         navProfile = findViewById(R.id.linearLayoutProfile);
         btnProfile = findViewById(R.id.btnProfile);
@@ -48,24 +59,24 @@ public class ExplorePage extends AppCompatActivity {
         bottomNav();
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        fragmentImplementation(new ExplorePageFragment(),"Local Attractions");
+        fragmentImplementation(new ExplorePageFragment(),"Local Attractions", getExploreList("Local Attractions"));
 
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
 
                 if(tab.getPosition() == 0){
-                    fragmentImplementation(new ExplorePageFragment(), "Local Attractions");
+                    fragmentImplementation(new ExplorePageFragment(), "Local Attractions", getExploreList("Local Attractions"));
                 }
                 if(tab.getPosition() == 1){
-                    fragmentImplementation(new ExplorePageFragment(), "Water Activities");
+                    fragmentImplementation(new ExplorePageFragment(), "Water Activities", getExploreList("Water Activities"));
                 }
                 if(tab.getPosition() == 2){
-                    fragmentImplementation(new ExplorePageFragment(), "Dining & Nightlife");
-                    //Toast.makeText(HomePage.this, "Room3", Toast.LENGTH_SHORT).show();
+                    fragmentImplementation(new ExplorePageFragment(), "Dining & Nightlife", getExploreList("Dining & Nightlife"));
                 }
 
             }
+
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
@@ -78,6 +89,15 @@ public class ExplorePage extends AppCompatActivity {
             }
         });
     }
+    private List<Explore> getExploreList(String type){
+        List<Explore> selectedExplore = new ArrayList<>();
+        for(Explore explore : exploreList){
+            if(explore.getTitle().equals(type)){
+                selectedExplore.add(explore);
+            }
+        }
+        return selectedExplore;
+    }
 
     @Override
     public void onBackPressed() {
@@ -89,12 +109,13 @@ public class ExplorePage extends AppCompatActivity {
     }
 
 
-    private void fragmentImplementation(Fragment fragment, String title){
+    private void fragmentImplementation(Fragment fragment, String title, List<Explore> exploreList){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frameExplorePage, fragment);
         fragmentTransaction.commit();
         ExplorePageFragment.title = title;
+        ExplorePageFragment.exploreList = exploreList;
     }
 
     private void bottomNav(){
