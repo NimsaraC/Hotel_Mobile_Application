@@ -1,6 +1,8 @@
 package com.android.luxevista.userPages;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.CalendarView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -41,6 +43,7 @@ public class RoomDetailsPage extends AppCompatActivity {
             return insets;
         });
         roomDB = new RoomDB(this);
+        roomId = getIntent().getIntExtra("roomId", 0);
 
         txtRoomType = findViewById(R.id.txtRoomType);
         txtRoomPrice = findViewById(R.id.txtRoomPrice);
@@ -58,10 +61,10 @@ public class RoomDetailsPage extends AppCompatActivity {
         btnBookNow = findViewById(R.id.btnBookNow);
 
         setData();
+        bookButton();
 
     }
     private void setData() {
-        roomId = getIntent().getIntExtra("roomId", 0);
         room = roomDB.getRoomById(roomId);
 
         txtRoomType.setText(room.getRoomType());
@@ -91,6 +94,16 @@ public class RoomDetailsPage extends AppCompatActivity {
                 .placeholder(R.drawable.ic_launcher_background)
                 .error(R.drawable.home_screen)
                 .into(coverImage);
+    }
+    private void bookButton(){
+        btnBookNow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), RoomBookingPage.class);
+                intent.putExtra("roomId", roomId);
+                startActivity(intent);
+            }
+        });
     }
 
 }

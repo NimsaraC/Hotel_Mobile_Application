@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".userPages.RoomBookingPage">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/card"
+            android:orientation="horizontal"
+            android:padding="15dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                app:cardCornerRadius="50dp"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:id="@+id/btnBack"
+                    android:background="@color/card"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/arrow"
+                        android:rotationY="180"/>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_marginTop="2dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:fontFamily="@font/main_title"
+                android:layout_gravity="center"
+                android:text="LuxeVista"
+                android:textColor="@color/white"
+                android:textSize="23dp" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                app:cardCornerRadius="50dp"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:id="@+id/btnProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/user" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="200dp"
+                        android:background="@drawable/topcorner_card"
+                        android:elevation="15dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/txtRoomType"
+                                android:layout_margin="20dp"
+                                android:textAlignment="center"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="25dp"
+                                android:textColor="@color/white"
+                                android:fontFamily="@font/main_title"
+                                android:text="Room Type" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginEnd="20dp"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:layout_width="110dp"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/title"
+                                    android:text="Bed Type"
+                                    android:textColor="@color/white"
+                                    android:textSize="15dp" />
+
+                                <TextView
+                                    android:id="@+id/txtBedType"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/title"
+                                    android:text="Bed Type"
+                                    android:textColor="@color/white"
+                                    android:textSize="18dp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginEnd="20dp"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:layout_width="110dp"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/title"
+                                    android:text="Room Size"
+                                    android:textColor="@color/white"
+                                    android:textSize="15dp" />
+
+                                <TextView
+                                    android:id="@+id/txtRoomSize"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/title"
+                                    android:text="700ft"
+                                    android:textColor="@color/white"
+                                    android:textSize="18dp" />
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/txtRoomPrice"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="25dp"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginEnd="20dp"
+                                android:layout_marginTop="10dp"
+                                android:textColor="@color/Button"
+                                android:fontFamily="@font/main_title"
+                                android:text="$100 /Night" />
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:cardBackgroundColor="@color/card"
+                                app:cardElevation="15dp"
+                                android:layout_margin="20dp"
+                                app:cardCornerRadius="15dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/title"
+                                        android:text="Booking Details"
+                                        android:layout_marginTop="10dp"
+                                        android:layout_marginStart="20dp"
+                                        android:textColor="@color/white"
+                                        android:textSize="20dp" />
+
+                                    <CalendarView
+                                        android:id="@+id/calendarView"
+                                        android:weekDayTextAppearance="@style/TextStyleCalender"
+                                        android:elevation="15dp"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="10dp"/>
+
+                                </LinearLayout>
+
+                            </androidx.cardview.widget.CardView>
+
+                            <EditText
+                                android:id="@+id/edtCheckIn"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="CheckIn"
+                                android:textColorHint="@color/Button"
+                                android:background="@drawable/text_filed"
+                                android:textColor="@color/white"
+                                android:fontFamily="@font/main"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginEnd="20dp"/>
+
+                            <EditText
+                                android:id="@+id/edtCheckOut"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="CheckOut"
+                                android:textColorHint="@color/Button"
+                                android:background="@drawable/text_filed"
+                                android:textColor="@color/white"
+                                android:fontFamily="@font/main"
+                                android:layout_margin="20dp"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:layout_width="110dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="Total Night: "
+                                    android:fontFamily="@font/title"
+                                    android:textSize="15dp"
+                                    android:layout_marginStart="20dp"
+                                    android:textColor="@color/white"/>
+
+                                <TextView
+                                    android:id="@+id/txtNumberOfNights"
+                                    android:layout_width="200dp"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="18dp"
+                                    android:text="2 Night"
+                                    android:layout_marginEnd="20dp"
+                                    android:fontFamily="@font/title"
+                                    android:textColor="@color/white"/>
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="18dp"
+                                android:text="Guest Information"
+                                android:layout_margin="20dp"
+                                android:textAlignment="center"
+                                android:fontFamily="@font/main_title"
+                                android:textColor="@color/Button"/>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginEnd="20dp"
+                                android:layout_marginBottom="20dp"
+                                android:layout_marginTop="-10dp"
+                                app:cardCornerRadius="15dp"
+                                app:cardElevation="15dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="vertical"
+                                    android:background="@color/background">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="Full Name"
+                                        android:fontFamily="@font/main"
+                                        android:textColor="@color/subtitle"
+                                        android:layout_marginStart="10dp"
+                                        android:layout_marginEnd="10dp"
+                                        android:layout_marginTop="10dp"
+                                        android:layout_marginBottom="-5dp"/>
+
+                                    <EditText
+                                        android:id="@+id/edtName"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="@drawable/text_filed"
+                                        android:layout_margin="10dp"
+                                        android:textColor="@color/Button"
+                                        android:hint="FullName"
+                                        android:textColorHint="@color/subtitle"
+                                        android:fontFamily="@font/main"/>
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="Email"
+                                        android:fontFamily="@font/main"
+                                        android:textColor="@color/subtitle"
+                                        android:layout_marginStart="10dp"
+                                        android:layout_marginEnd="10dp"
+                                        android:layout_marginTop="10dp"
+                                        android:layout_marginBottom="-5dp"/>
+
+                                    <EditText
+                                        android:id="@+id/edtEmail"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="@drawable/text_filed"
+                                        android:layout_margin="10dp"
+                                        android:textColor="@color/Button"
+                                        android:hint="Email"
+                                        android:textColorHint="@color/subtitle"
+                                        android:fontFamily="@font/main"/>
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="Phone"
+                                        android:fontFamily="@font/main"
+                                        android:textColor="@color/subtitle"
+                                        android:layout_marginStart="10dp"
+                                        android:layout_marginEnd="10dp"
+                                        android:layout_marginTop="10dp"
+                                        android:layout_marginBottom="-5dp"/>
+
+                                    <EditText
+                                        android:id="@+id/edtPhone"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="@drawable/text_filed"
+                                        android:layout_margin="10dp"
+                                        android:textColor="@color/Button"
+                                        android:hint="Phone"
+                                        android:textColorHint="@color/subtitle"
+                                        android:fontFamily="@font/main"/>
+
+                                </LinearLayout>
+
+                            </androidx.cardview.widget.CardView>
+
+                            <TextView
+                                android:id="@+id/txtCancel"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="18dp"
+                                android:text="Free cancellation until 24 hours before check in"
+                                android:layout_margin="20dp"
+                                android:textAlignment="center"
+                                android:textStyle="italic"
+                                android:fontFamily="@font/main_title"
+                                android:textColor="@color/Button"/>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:cardElevation="15dp"
+                                app:cardCornerRadius="15dp"
+                                android:layout_marginTop="-10dp"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginBottom="20dp"
+                                android:layout_marginEnd="20dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/card"
+                                    android:padding="10dp"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Total Price:"
+                                            android:fontFamily="@font/title"
+                                            android:textColor="@color/white"
+                                            android:textSize="20dp"/>
+
+                                        <TextView
+                                            android:id="@+id/txtTotalPrice"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:text="$300.00"
+                                            android:textAlignment="textEnd"
+                                            android:fontFamily="@font/main_title"
+                                            android:textColor="@color/white"
+                                            android:textSize="20dp"/>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Total Price:"
+                                            android:fontFamily="@font/main"
+                                            android:textColor="@color/white"
+                                            android:textSize="15dp"/>
+
+                                        <TextView
+                                            android:id="@+id/txtFee"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:text="$300.00"
+                                            android:textAlignment="textEnd"
+                                            android:fontFamily="@font/main"
+                                            android:textColor="@color/white"
+                                            android:textSize="15dp"/>
+
+                                    </LinearLayout>
+
+                                    <com.google.android.material.divider.MaterialDivider
+                                        android:layout_width="match_parent"
+                                        app:dividerColor="@color/background"
+                                        app:dividerThickness="2dp"
+                                        android:layout_height="wrap_content"/>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="15dp"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Final Price:"
+                                            android:fontFamily="@font/main_title"
+                                            android:textColor="@color/Button"
+                                            android:textSize="20dp"/>
+
+                                        <TextView
+                                            android:id="@+id/txtFinalPrice"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:text="$300.00"
+                                            android:textAlignment="textEnd"
+                                            android:fontFamily="@font/main_title"
+                                            android:textColor="@color/Button"
+                                            android:textSize="20dp"/>
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                            </androidx.cardview.widget.CardView>
+
+                            <CheckBox
+                                android:id="@+id/checkbox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:text="I agree to the therms and ondition"
+                                android:textSize="15dp"
+                                android:fontFamily="@font/main"
+                                android:textColor="@color/white"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:layout_marginEnd="20dp"/>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="65dp"
+                                app:cardCornerRadius="15dp"
+                                app:cardElevation="15dp"
+                                android:layout_margin="20dp">
+
+                                <LinearLayout
+                                    android:id="@+id/btnPayNow"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/Button">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:textColor="@color/background"
+                                        android:textSize="25dp"
+                                        android:text="Pay Now"
+                                        android:layout_gravity="center"
+                                        android:gravity="center"
+                                        android:fontFamily="@font/main_title"/>
+                                </LinearLayout>
+
+                            </androidx.cardview.widget.CardView>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+
+        <!--        CoverImage-->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:cardElevation="-15dp"
+            app:layout_constraintTop_toTopOf="parent" >
+
+            <ImageView
+                android:id="@+id/coverImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/home_screen"
+                android:scaleType="centerCrop"/>
+
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</LinearLayout>

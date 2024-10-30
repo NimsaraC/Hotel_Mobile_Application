@@ -69,44 +69,6 @@ public class RoomDB extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
     }
-
-    /*
-    public Long insertRoom(Room room) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(ROOM_TYPE, room.getRoomType());
-        values.put(DESCRIPTION, room.getDescription());
-        values.put(ROOM_SIZE, room.getRoomSize());
-        values.put(BED_TYPE, room.getBedType());
-        values.put(VIEW, room.getView());
-        values.put(OCCUPANCY, room.getOccupancy());
-        values.put(AMENITIES, room.getAmenities());
-        values.put(ADDITIONAL_SERVICES, room.getAdditionalServices());
-        values.put(CHECKIN_TIME, room.getCheckInTime());
-        values.put(CHECKOUT_TIME, room.getCheckOutTime());
-        values.put(CANCELLATION_POLICY, room.getCancellationPolicy());
-        values.put(NO_SMOKING_POLICY, room.getNoSmokingPolicy());
-        values.put(RATE, room.getRate());
-        values.put(COVER_IMAGE, room.getCoverImage());
-
-        if (room.getAdditionalImages() != null) {
-            String jsonImages = new Gson().toJson(room.getAdditionalImages());
-            values.put(ADDITIONAL_IMAGES, jsonImages);
-        } else {
-            values.put(ADDITIONAL_IMAGES, "[]");
-        }
-
-        Long result = -1L;
-        try {
-            result = db.insert(TABLE_NAME, null, values);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            db.close();
-        }
-
-        return result;
-    }*/
     public Long insertRoom(Room room) {
     SQLiteDatabase db = this.getWritableDatabase();
     ContentValues values = new ContentValues();
@@ -130,46 +92,6 @@ public class RoomDB extends SQLiteOpenHelper {
         db.close();
         return result;
 }
-/*
-    public Room getRoomById(int id) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Room room = null;
-
-        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + ROOM_ID + " = ?";
-        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(id)});
-
-        if (cursor.moveToFirst()) {
-            List<String> additionalImages = new ArrayList<>();
-            String[] images = cursor.getString(cursor.getColumnIndexOrThrow(ADDITIONAL_IMAGES)).split(",");
-            for (String img : images) {
-                additionalImages.add(img.trim());
-            }
-
-            room = new Room(
-                    cursor.getString(cursor.getColumnIndexOrThrow(ROOM_ID)),
-                    cursor.getString(cursor.getColumnIndexOrThrow(ROOM_TYPE)),
-                    cursor.getString(cursor.getColumnIndexOrThrow(DESCRIPTION)),
-                    cursor.getString(cursor.getColumnIndexOrThrow(ROOM_SIZE)),
-                    cursor.getString(cursor.getColumnIndexOrThrow(BED_TYPE)),
-                    cursor.getString(cursor.getColumnIndexOrThrow(VIEW)),
-                    cursor.getInt(cursor.getColumnIndexOrThrow(OCCUPANCY)),
-                    cursor.getString(cursor.getColumnIndexOrThrow(AMENITIES)),
-                    cursor.getString(cursor.getColumnIndexOrThrow(ADDITIONAL_SERVICES)),
-                    cursor.getString(cursor.getColumnIndexOrThrow(CHECKIN_TIME)),
-                    cursor.getString(cursor.getColumnIndexOrThrow(CHECKOUT_TIME)),
-                    cursor.getString(cursor.getColumnIndexOrThrow(CANCELLATION_POLICY)),
-                    cursor.getString(cursor.getColumnIndexOrThrow(NO_SMOKING_POLICY)),
-                    cursor.getDouble(cursor.getColumnIndexOrThrow(RATE)),
-                    cursor.getString(cursor.getColumnIndexOrThrow(COVER_IMAGE)),
-                    additionalImages
-            );
-        }
-
-        cursor.close();
-        db.close();
-        return room;
-    }*/
-
     public Room getRoomById(int roomId) {
         Room room = null;
 
@@ -205,50 +127,6 @@ public class RoomDB extends SQLiteOpenHelper {
         return room;
     }
 
-    /*
-    public List<Room> getAllRooms() {
-        List<Room> roomList = new ArrayList<>();
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        String query = "SELECT * FROM " + TABLE_NAME;
-        Cursor cursor = db.rawQuery(query, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                List<String> additionalImages = new ArrayList<>();
-                String imagesJson = cursor.getString(cursor.getColumnIndexOrThrow(ADDITIONAL_IMAGES));
-                if (imagesJson != null && !imagesJson.isEmpty()) {
-                    additionalImages = new Gson().fromJson(imagesJson, ArrayList.class);
-                }
-
-                Room room = new Room(
-                        cursor.getString(cursor.getColumnIndexOrThrow(ROOM_ID)),
-                        cursor.getString(cursor.getColumnIndexOrThrow(ROOM_TYPE)),
-                        cursor.getString(cursor.getColumnIndexOrThrow(DESCRIPTION)),
-                        cursor.getString(cursor.getColumnIndexOrThrow(ROOM_SIZE)),
-                        cursor.getString(cursor.getColumnIndexOrThrow(BED_TYPE)),
-                        cursor.getString(cursor.getColumnIndexOrThrow(VIEW)),
-                        cursor.getInt(cursor.getColumnIndexOrThrow(OCCUPANCY)),
-                        cursor.getString(cursor.getColumnIndexOrThrow(AMENITIES)),
-                        cursor.getString(cursor.getColumnIndexOrThrow(ADDITIONAL_SERVICES)),
-                        cursor.getString(cursor.getColumnIndexOrThrow(CHECKIN_TIME)),
-                        cursor.getString(cursor.getColumnIndexOrThrow(CHECKOUT_TIME)),
-                        cursor.getString(cursor.getColumnIndexOrThrow(CANCELLATION_POLICY)),
-                        cursor.getString(cursor.getColumnIndexOrThrow(NO_SMOKING_POLICY)),
-                        cursor.getDouble(cursor.getColumnIndexOrThrow(RATE)),
-                        cursor.getString(cursor.getColumnIndexOrThrow(COVER_IMAGE)),
-                        additionalImages
-                );
-
-                roomList.add(room);
-            } while (cursor.moveToNext());
-        }
-
-        cursor.close();
-        db.close();
-
-        return roomList;
-    }*/
 public List<Room> getAllRooms() {
     List<Room> roomList = new ArrayList<>();
 

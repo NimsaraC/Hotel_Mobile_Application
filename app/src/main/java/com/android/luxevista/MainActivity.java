@@ -16,6 +16,7 @@ import com.android.luxevista.adminPages.AdminHomePageTemp;
 import com.android.luxevista.userPages.HomePage;
 import com.android.luxevista.userPages.Login;
 import com.android.luxevista.userPages.PoolServiceDetailsPage;
+import com.android.luxevista.userPages.RoomBookingPage;
 import com.android.luxevista.userPages.RoomDetailsPage;
 import com.android.luxevista.userPages.SpaServiceDetailsPage;
 
