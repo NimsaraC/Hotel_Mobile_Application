@@ -3,6 +3,7 @@ package com.android.luxevista.adapter;
 import static java.security.AccessController.getContext;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.luxevista.R;
 import com.android.luxevista.LuxeService;
+import com.android.luxevista.userPages.DiningServiceDetailsPage;
+import com.android.luxevista.userPages.PoolServiceDetailsPage;
+import com.android.luxevista.userPages.RoomDetailsPage;
+import com.android.luxevista.userPages.SpaServiceDetailsPage;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -53,7 +58,21 @@ public class HomePageServiceAdapter extends RecyclerView.Adapter<HomePageService
         holder.serviceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Handle service click (e.g., open service details)
+                int id = service.getId();
+                if(service.getServiceTitle().equals("Spa service")){
+                    Intent intent = new Intent(context, SpaServiceDetailsPage.class);
+                    intent.putExtra("serviceId", id);
+                    context.startActivity(intent);
+                }else if(service.getServiceTitle().equals("Dining service")){
+                    Intent intent = new Intent(context, DiningServiceDetailsPage.class);
+                    intent.putExtra("serviceId", id);
+                    context.startActivity(intent);
+                }else{
+                    Intent intent = new Intent(context, PoolServiceDetailsPage.class);
+                    intent.putExtra("serviceId", id);
+                    context.startActivity(intent);
+                }
+
             }
         });
     }

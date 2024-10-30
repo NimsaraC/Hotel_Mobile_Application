@@ -1,6 +1,7 @@
 package com.android.luxevista.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.luxevista.R;
 import com.android.luxevista.Explore;
+import com.android.luxevista.userPages.ExploreDetailsPage;
+import com.android.luxevista.userPages.SpaServiceDetailsPage;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -50,9 +53,13 @@ public class HomePageExploreAdapter extends RecyclerView.Adapter<HomePageExplore
                 .into(holder.imvCover);
 
         holder.exploreBtn.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                // Handle exploration item click (e.g., open explore details)
+                int id = explore.getId();
+                Intent intent = new Intent(context, ExploreDetailsPage.class);
+                intent.putExtra("exploreId", id);
+                context.startActivity(intent);
             }
         });
     }

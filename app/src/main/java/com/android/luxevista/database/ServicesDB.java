@@ -17,8 +17,6 @@ public class ServicesDB extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "ServicesDB";
     private static final int DATABASE_VERSION = 1;
     private static final String TABLE_NAME = "Services";
-
-    // Column names
     private static final String SERVICE_ID = "id";
     private static final String SERVICE_TITLE = "serviceTitle";
     private static final String SERVICE_TYPE = "serviceType";
@@ -105,7 +103,6 @@ public class ServicesDB extends SQLiteOpenHelper {
         return result;
     }
 
-    // Method to get a service by ID
     public LuxeService getServiceById(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         LuxeService service = null;

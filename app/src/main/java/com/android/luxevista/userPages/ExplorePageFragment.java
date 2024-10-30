@@ -39,7 +39,7 @@ public class ExplorePageFragment extends Fragment {
 
         recyclerView.setLayoutManager(layoutManager);
 
-        adapter = new HomePageExploreAdapter(context, exploreList);
+        adapter = new HomePageExploreAdapter(getContext(), exploreList);
         recyclerView.setAdapter(adapter);
 
         txttitle = view.findViewById(R.id.exploreTitle);

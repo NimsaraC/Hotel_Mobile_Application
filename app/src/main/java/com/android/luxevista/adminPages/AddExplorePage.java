@@ -223,6 +223,7 @@ public class AddExplorePage extends AppCompatActivity {
         return "";
     }
 
+    // TODO: 10/30/2024 Remove Spinner and manually add custom types
     private void setupSpinner() {
 
         if(serviceTitle.equals("Local Attractions")){

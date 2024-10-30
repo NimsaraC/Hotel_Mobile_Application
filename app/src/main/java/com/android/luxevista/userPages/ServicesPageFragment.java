@@ -39,7 +39,7 @@ public class ServicesPageFragment extends Fragment {
 
         recyclerView.setLayoutManager(layoutManager);
 
-        adapter = new HomePageServiceAdapter(context, serviceList);
+        adapter = new HomePageServiceAdapter(getContext(), serviceList);
         recyclerView.setAdapter(adapter);
 
         txttitle = view.findViewById(R.id.serviceTitle);

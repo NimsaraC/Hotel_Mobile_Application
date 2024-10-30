@@ -15,6 +15,18 @@
         android:theme="@style/Theme.LuxeVista"
         tools:targetApi="31">
         <activity
+            android:name=".userPages.ExploreDetailsPage"
+            android:exported="false" />
+        <activity
+            android:name=".userPages.PoolServiceDetailsPage"
+            android:exported="false" />
+        <activity
+            android:name=".userPages.DiningServiceDetailsPage"
+            android:exported="false" />
+        <activity
+            android:name=".userPages.SpaServiceDetailsPage"
+            android:exported="false" />
+        <activity
             android:name=".userPages.RoomDetailsPage"
             android:exported="false" />
         <activity
