@@ -14,8 +14,9 @@ public class Booking {
     private String guestName;
     private String guestEmail;
     private String guestPhone;
+    private String userId;
 
-    public Booking(int bookingId, String bookingTitle, String bookingType, String checkInDate, String checkOutDate, String bookingDate, String bookingStatus, String specialRequests, double totalPrice, double taxes, String guestName, String guestEmail, String guestPhone) {
+    public Booking(int bookingId, String bookingTitle, String bookingType, String checkInDate, String checkOutDate, String bookingDate, String bookingStatus, String specialRequests, double totalPrice, double taxes, String guestName, String guestEmail, String guestPhone, String userId) {
         this.bookingId = bookingId;
         this.bookingTitle = bookingTitle;
         this.bookingType = bookingType;
@@ -29,9 +30,10 @@ public class Booking {
         this.guestName = guestName;
         this.guestEmail = guestEmail;
         this.guestPhone = guestPhone;
+        this.userId = userId;
     }
 
-    public Booking(String bookingTitle, String bookingType, String checkInDate, String checkOutDate, String bookingDate, String bookingStatus, String specialRequests, double totalPrice, double taxes, String guestName, String guestEmail, String guestPhone) {
+    public Booking(String bookingTitle, String bookingType, String checkInDate, String checkOutDate, String bookingDate, String bookingStatus, String specialRequests, double totalPrice, double taxes, String guestName, String guestEmail, String guestPhone, String userId) {
         this.bookingTitle = bookingTitle;
         this.bookingType = bookingType;
         this.checkInDate = checkInDate;
@@ -44,6 +46,7 @@ public class Booking {
         this.guestName = guestName;
         this.guestEmail = guestEmail;
         this.guestPhone = guestPhone;
+        this.userId = userId;
     }
 
     public int getBookingId() {
@@ -148,5 +151,13 @@ public class Booking {
 
     public void setGuestPhone(String guestPhone) {
         this.guestPhone = guestPhone;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

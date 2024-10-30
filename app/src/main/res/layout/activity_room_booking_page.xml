@@ -226,28 +226,34 @@
 
                             </androidx.cardview.widget.CardView>
 
-                            <EditText
+                            <TextView
                                 android:id="@+id/edtCheckIn"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="CheckIn"
+                                android:text="Check-In"
                                 android:textColorHint="@color/Button"
                                 android:background="@drawable/text_filed"
                                 android:textColor="@color/white"
                                 android:fontFamily="@font/main"
                                 android:layout_marginStart="20dp"
-                                android:layout_marginEnd="20dp"/>
+                                android:textSize="18dp"
+                                android:layout_marginEnd="20dp"
+                                android:padding="10dp" />
 
-                            <EditText
+                            <TextView
                                 android:id="@+id/edtCheckOut"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="CheckOut"
+                                android:text="Check-Out"
                                 android:textColorHint="@color/Button"
                                 android:background="@drawable/text_filed"
                                 android:textColor="@color/white"
                                 android:fontFamily="@font/main"
-                                android:layout_margin="20dp"/>
+                                android:layout_margin="20dp"
+                                android:textSize="18dp"
+                                android:padding="10dp" />
+
+
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -267,10 +273,11 @@
                                     android:layout_width="200dp"
                                     android:layout_height="wrap_content"
                                     android:textSize="18dp"
-                                    android:text="2 Night"
+                                    android:text="0 Nights"
                                     android:layout_marginEnd="20dp"
                                     android:fontFamily="@font/title"
                                     android:textColor="@color/white"/>
+
 
                             </LinearLayout>
 
@@ -359,8 +366,51 @@
                                         android:layout_height="wrap_content"
                                         android:background="@drawable/text_filed"
                                         android:layout_margin="10dp"
+                                        android:inputType="number"
                                         android:textColor="@color/Button"
                                         android:hint="Phone"
+                                        android:textColorHint="@color/subtitle"
+                                        android:fontFamily="@font/main"/>
+
+                                </LinearLayout>
+
+                            </androidx.cardview.widget.CardView>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="18dp"
+                                android:text="Special Request"
+                                android:layout_margin="20dp"
+                                android:textAlignment="center"
+                                android:fontFamily="@font/main_title"
+                                android:textColor="@color/Button"/>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginEnd="20dp"
+                                android:layout_marginBottom="20dp"
+                                android:layout_marginTop="-10dp"
+                                app:cardCornerRadius="15dp"
+                                app:cardElevation="15dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="vertical"
+                                    android:background="@color/background">
+
+                                    <EditText
+                                        android:id="@+id/edtSpecialReq"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="@drawable/text_filed"
+                                        android:layout_margin="10dp"
+                                        android:textColor="@color/Button"
+                                        android:textStyle="italic"
+                                        android:hint="Request"
                                         android:textColorHint="@color/subtitle"
                                         android:fontFamily="@font/main"/>
 
@@ -414,7 +464,7 @@
                                             android:id="@+id/txtTotalPrice"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:text="$300.00"
+                                            android:text="$0.00"
                                             android:textAlignment="textEnd"
                                             android:fontFamily="@font/main_title"
                                             android:textColor="@color/white"
@@ -430,7 +480,7 @@
                                         <TextView
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:text="Total Price:"
+                                            android:text="Estimated taxes and fees: "
                                             android:fontFamily="@font/main"
                                             android:textColor="@color/white"
                                             android:textSize="15dp"/>
@@ -439,7 +489,7 @@
                                             android:id="@+id/txtFee"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:text="$300.00"
+                                            android:text="$0.00"
                                             android:textAlignment="textEnd"
                                             android:fontFamily="@font/main"
                                             android:textColor="@color/white"
@@ -471,7 +521,7 @@
                                             android:id="@+id/txtFinalPrice"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:text="$300.00"
+                                            android:text="$0.00"
                                             android:textAlignment="textEnd"
                                             android:fontFamily="@font/main_title"
                                             android:textColor="@color/Button"

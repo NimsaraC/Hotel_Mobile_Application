@@ -29,6 +29,7 @@ public class BookingDB extends SQLiteOpenHelper {
     private static final String GUEST_NAME = "guestName";
     private static final String GUEST_EMAIL = "guestEmail";
     private static final String GUEST_PHONE = "guestPhone";
+    private static final String GUEST_ID = "guestId";
 
     private static final String TABLE_CREATE =
             "CREATE TABLE " + TABLE_NAME + " (" +
@@ -44,7 +45,8 @@ public class BookingDB extends SQLiteOpenHelper {
                     TAXES + " REAL NOT NULL, " +
                     GUEST_NAME + " TEXT NOT NULL, " +
                     GUEST_EMAIL + " TEXT NOT NULL, " +
-                    GUEST_PHONE + " TEXT NOT NULL" +
+                    GUEST_PHONE + " TEXT NOT NULL, " +
+                    GUEST_ID + " TEXT NOT NULL" +
                     ");";
 
     public BookingDB(Context context) {
@@ -77,6 +79,7 @@ public class BookingDB extends SQLiteOpenHelper {
         values.put(GUEST_NAME, booking.getGuestName());
         values.put(GUEST_EMAIL, booking.getGuestEmail());
         values.put(GUEST_PHONE, booking.getGuestPhone());
+        values.put(GUEST_ID, booking.getUserId());
 
         Long result = db.insert(TABLE_NAME, null, values);
         db.close();
@@ -105,7 +108,8 @@ public class BookingDB extends SQLiteOpenHelper {
                         cursor.getDouble(cursor.getColumnIndexOrThrow(TAXES)),
                         cursor.getString(cursor.getColumnIndexOrThrow(GUEST_NAME)),
                         cursor.getString(cursor.getColumnIndexOrThrow(GUEST_EMAIL)),
-                        cursor.getString(cursor.getColumnIndexOrThrow(GUEST_PHONE))
+                        cursor.getString(cursor.getColumnIndexOrThrow(GUEST_PHONE)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(GUEST_ID))
                 );
             }
             cursor.close();
@@ -138,7 +142,9 @@ public class BookingDB extends SQLiteOpenHelper {
                             cursor.getDouble(cursor.getColumnIndexOrThrow(TAXES)),
                             cursor.getString(cursor.getColumnIndexOrThrow(GUEST_NAME)),
                             cursor.getString(cursor.getColumnIndexOrThrow(GUEST_EMAIL)),
-                            cursor.getString(cursor.getColumnIndexOrThrow(GUEST_PHONE))
+                            cursor.getString(cursor.getColumnIndexOrThrow(GUEST_PHONE)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(GUEST_ID))
+
                     );
 
                     bookingList.add(booking);
