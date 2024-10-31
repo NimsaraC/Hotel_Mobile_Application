@@ -2,6 +2,7 @@ package com.android.luxevista.userPages;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CalendarView;
@@ -19,6 +20,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.android.luxevista.Booking;
+import com.android.luxevista.EventDecorator;
 import com.android.luxevista.R;
 import com.android.luxevista.Room;
 import com.android.luxevista.User;
@@ -26,10 +28,17 @@ import com.android.luxevista.adminPages.AddRoomPage;
 import com.android.luxevista.database.BookingDB;
 import com.android.luxevista.database.RoomDB;
 import com.android.luxevista.database.UserDB;
+import com.prolificinteractive.materialcalendarview.CalendarDay;
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
@@ -50,6 +59,8 @@ public class RoomBookingPage extends AppCompatActivity {
     private int roomId = 0, userId =0;
     private boolean isCheckInSelected = false, isChecked = false;
     private double totalPrice =0, finalPrice=0, tax =0;
+    private List<Booking> bookings;
+    private List<String> bookingDates;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +88,41 @@ public class RoomBookingPage extends AppCompatActivity {
         setGuestDetails();
         pickDates();
         payNowButton();
+        setCalendar();
 
+    }
+    private void setCalendar(){
+        bookingDB = new BookingDB(this);
+        bookings = bookingDB.getAllBookings();
+        bookingDates = new ArrayList<>();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        for (Booking booking : bookings) {
+            String checkInDateStr = booking.getCheckInDate();
+            String checkOutDateStr = booking.getCheckOutDate();
+
+            LocalDate checkInDate = LocalDate.parse(checkInDateStr, formatter);
+            LocalDate checkOutDate = LocalDate.parse(checkOutDateStr, formatter);
+
+            for (LocalDate date = checkInDate; !date.isAfter(checkOutDate); date = date.plusDays(1)) {
+                bookingDates.add(date.format(formatter));
+            }
+        }
+
+        MaterialCalendarView calendarView = findViewById(R.id.calendarView);
+
+        HashSet<CalendarDay> dates = new HashSet<>();
+        for (String dateString : bookingDates) {
+            String[] parts = dateString.split("-");
+            int year = Integer.parseInt(parts[0]);
+            int month = Integer.parseInt(parts[1]) - 1;
+            int day = Integer.parseInt(parts[2]);
+            dates.add(CalendarDay.from(year, month, day));
+        }
+
+        calendarView.setEnabled(false);
+        calendarView.addDecorator(new EventDecorator(Color.RED, dates));
     }
 
     private void pickDates(){
@@ -90,6 +135,8 @@ public class RoomBookingPage extends AppCompatActivity {
         });
     }
     private void showDatePickerDialog(Calendar calendar, TextView textView, boolean isCheckIn) {
+        setCalendar();
+
         DatePickerDialog datePickerDialog = new DatePickerDialog(this,
                 (view, year, monthOfYear, dayOfMonth) -> {
                     calendar.set(Calendar.YEAR, year);
@@ -97,17 +144,23 @@ public class RoomBookingPage extends AppCompatActivity {
                     calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-                    textView.setText(sdf.format(calendar.getTime()));
+                    String selectedDate = sdf.format(calendar.getTime());
+                    if (bookingDates.contains(selectedDate)) {
+                        Toast.makeText(this, "Date is not available", Toast.LENGTH_SHORT).show();
+                    }else{
+                        textView.setText(sdf.format(calendar.getTime()));
 
-                    if (isCheckIn) {
-                        isCheckInSelected = true;
-                        checkOutCalendar.setTime(calendar.getTime());
-                        checkOutCalendar.add(Calendar.DAY_OF_YEAR, 1);
-                        edtCheckOut.setText("Check-Out");
-                        txtNumberOfNights.setText("0 Nights");
-                    } else {
-                        calculateAndDisplayNights();
+                        if (isCheckIn) {
+                            isCheckInSelected = true;
+                            checkOutCalendar.setTime(calendar.getTime());
+                            checkOutCalendar.add(Calendar.DAY_OF_YEAR, 1);
+                            edtCheckOut.setText("Check-Out");
+                            txtNumberOfNights.setText("0 Nights");
+                        } else {
+                            calculateAndDisplayNights();
+                        }
                     }
+
                 },
                 calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),
@@ -218,7 +271,7 @@ public class RoomBookingPage extends AppCompatActivity {
         txtTotalPrice = findViewById(R.id.txtTotalPrice);
         txtFee = findViewById(R.id.txtFee);
         txtFinalPrice = findViewById(R.id.txtFinalPrice);
-        calendarView = findViewById(R.id.calendarView);
+        //calendarView = findViewById(R.id.calendarView);
         edtCheckIn = findViewById(R.id.edtCheckIn);
         edtCheckOut = findViewById(R.id.edtCheckOut);
         edtSpecialReq = findViewById(R.id.edtSpecialReq);

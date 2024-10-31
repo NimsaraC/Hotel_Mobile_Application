@@ -15,6 +15,9 @@
         android:theme="@style/Theme.LuxeVista"
         tools:targetApi="31">
         <activity
+            android:name=".CalanderTest"
+            android:exported="false" />
+        <activity
             android:name=".userPages.RoomBookingPage"
             android:exported="false" />
         <activity

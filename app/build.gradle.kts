@@ -41,6 +41,7 @@ dependencies {
     implementation ("com.squareup.picasso:picasso:2.71828")
     implementation ("com.google.code.gson:gson:2.8.9")
     implementation ("androidx.viewpager2:viewpager2:1.0.0")
+    implementation ("com.prolificinteractive:material-calendarview:1.4.3")
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
