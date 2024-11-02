@@ -21,9 +21,10 @@ public class Booking {
     private String bookingTime;
     private String serviceId;
     private String duration;
+    private String numberOfGuests;
 
     //getData
-    public Booking(int bookingId, String bookingTitle, String bookingType, String checkInDate, String checkOutDate, String bookingDate, String bookingStatus, String specialRequests, double totalPrice, double taxes, String guestName, String guestEmail, String guestPhone, String userId, String roomId, String bookingTime, String serviceId, String duration) {
+    public Booking(int bookingId, String bookingTitle, String bookingType, String checkInDate, String checkOutDate, String bookingDate, String bookingStatus, String specialRequests, double totalPrice, double taxes, String guestName, String guestEmail, String guestPhone, String userId, String roomId, String bookingTime, String serviceId, String duration, String numberOfGuests) {
         this.bookingId = bookingId;
         this.bookingTitle = bookingTitle;
         this.bookingType = bookingType;
@@ -42,6 +43,7 @@ public class Booking {
         this.bookingTime = bookingTime;
         this.serviceId = serviceId;
         this.duration = duration;
+        this.numberOfGuests = numberOfGuests;
     }
 
     //Room
@@ -79,6 +81,24 @@ public class Booking {
         this.serviceId = serviceId;
         this.duration = duration;
     }
+
+    public Booking(String bookingTitle, String bookingType, String bookingDate, String bookingStatus, String specialRequests, double totalPrice, double taxes, String guestName, String guestEmail, String guestPhone, String userId, String serviceId, String numberOfGuests) {
+        this.bookingTitle = bookingTitle;
+        this.bookingType = bookingType;
+        this.bookingDate = bookingDate;
+        this.bookingStatus = bookingStatus;
+        this.specialRequests = specialRequests;
+        this.totalPrice = totalPrice;
+        this.taxes = taxes;
+        this.guestName = guestName;
+        this.guestEmail = guestEmail;
+        this.guestPhone = guestPhone;
+        this.userId = userId;
+        this.serviceId = serviceId;
+        this.numberOfGuests = numberOfGuests;
+    }
+
+
 
     public int getBookingId() {
         return bookingId;
@@ -221,5 +241,13 @@ public class Booking {
 
     public void setDuration(String duration) {
         this.duration = duration;
+    }
+
+    public String getNumberOfGuests() {
+        return numberOfGuests;
+    }
+
+    public void setNumberOfGuests(String numberOfGuests) {
+        this.numberOfGuests = numberOfGuests;
     }
 }

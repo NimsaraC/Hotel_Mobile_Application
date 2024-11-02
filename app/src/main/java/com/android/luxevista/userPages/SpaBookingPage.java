@@ -95,7 +95,6 @@ public class SpaBookingPage extends AppCompatActivity {
                 .error(R.drawable.home_screen)
                 .into(coverImage);
     }
-
     private void saveBooking() {
         btnPayNow.setOnClickListener(new View.OnClickListener() {
             @Override

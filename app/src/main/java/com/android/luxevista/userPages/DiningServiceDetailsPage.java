@@ -1,6 +1,8 @@
 package com.android.luxevista.userPages;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -49,6 +51,15 @@ public class DiningServiceDetailsPage extends AppCompatActivity {
         serviceId = getIntent().getIntExtra("serviceId", 0);
 
         setServiceDetails();
+
+        btnBookNow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DiningServiceDetailsPage.this, DiningBookingPage.class);
+                intent.putExtra("serviceId", serviceId);
+                startActivity(intent);
+            }
+        });
     }
     private void setServiceDetails(){
         service = db.getServiceById(serviceId);
