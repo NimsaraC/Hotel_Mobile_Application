@@ -44,7 +44,6 @@ import java.util.concurrent.TimeUnit;
 
 public class RoomBookingPage extends AppCompatActivity {
     private TextView edtCheckIn, edtCheckOut, txtRoomType, txtBedType, txtRoomSize, txtRoomPrice, txtNumberOfNights, txtCancel, txtTotalPrice, txtFee, txtFinalPrice;
-    private CalendarView calendarView;
     private EditText  edtName, edtEmail, edtPhone, edtSpecialReq;
     private Calendar checkInCalendar, checkOutCalendar;
     private CheckBox checkbox;
@@ -78,10 +77,10 @@ public class RoomBookingPage extends AppCompatActivity {
         bookingDB = new BookingDB(this);
         userDB = new UserDB(this);
 
-        roomId = getIntent().getIntExtra("roomId",0);
-
         checkInCalendar = Calendar.getInstance();
         checkOutCalendar = Calendar.getInstance();
+
+        roomId = getIntent().getIntExtra("roomId",0);
 
         findComponents();
         setRoomDetails();
@@ -89,11 +88,12 @@ public class RoomBookingPage extends AppCompatActivity {
         pickDates();
         payNowButton();
         setCalendar();
+        navButtons();
 
     }
     private void setCalendar(){
         bookingDB = new BookingDB(this);
-        bookings = bookingDB.getAllBookings();
+        bookings = bookingDB.getAllBookingsByRoomId(roomId);
         bookingDates = new ArrayList<>();
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -124,7 +124,6 @@ public class RoomBookingPage extends AppCompatActivity {
         calendarView.setEnabled(false);
         calendarView.addDecorator(new EventDecorator(Color.RED, dates));
     }
-
     private void pickDates(){
         edtCheckIn.setOnClickListener(v -> showDatePickerDialog(checkInCalendar, edtCheckIn, true));
 
@@ -169,7 +168,6 @@ public class RoomBookingPage extends AppCompatActivity {
         datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
         datePickerDialog.show();
     }
-
     private void calculateAndDisplayNights() {
         room = roomDB.getRoomById(roomId);
 
@@ -233,6 +231,7 @@ public class RoomBookingPage extends AppCompatActivity {
                     request = edtSpecialReq.getText().toString();
                 }
 
+                String roomID = String.valueOf(roomId);
                 booking = new Booking(
                         "room",
                         txtRoomType.getText().toString(),
@@ -246,7 +245,8 @@ public class RoomBookingPage extends AppCompatActivity {
                         edtName.getText().toString(),
                         edtEmail.getText().toString(),
                         edtPhone.getText().toString(),
-                        "1"
+                        "1",
+                        roomID
                 );
 
                 Long result = bookingDB.insertBooking(booking);
@@ -283,5 +283,20 @@ public class RoomBookingPage extends AppCompatActivity {
         btnBack = findViewById(R.id.btnBack);
         btnProfile = findViewById(R.id.btnProfile);
         coverImage = findViewById(R.id.coverImage);
+    }
+    private void navButtons(){
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        btnProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ProfilePage.class);
+                startActivity(intent);
+            }
+        });
     }
 }

@@ -59,14 +59,14 @@ public class ServicesPage extends AppCompatActivity {
         bottomNav();
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        fragmentImplementation(new ServicesPageFragment(),"Spa & Wellness", getServices("Spa & Wellness"));
+        fragmentImplementation(new ServicesPageFragment(),"Spa & Wellness", getServices("Spa service"));
 
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
 
                 if(tab.getPosition() == 0){
-                    fragmentImplementation(new ServicesPageFragment(), "Spa service", getServices("Spa & Wellness"));
+                    fragmentImplementation(new ServicesPageFragment(), "Spa & Wellness", getServices("Spa service"));
                 }
                 if(tab.getPosition() == 1){
                     fragmentImplementation(new ServicesPageFragment(), "Dining Reservations", getServices("Dining service"));

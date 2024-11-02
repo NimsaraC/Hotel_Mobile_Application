@@ -15,8 +15,15 @@ public class Booking {
     private String guestEmail;
     private String guestPhone;
     private String userId;
+    private String roomId;
 
-    public Booking(int bookingId, String bookingTitle, String bookingType, String checkInDate, String checkOutDate, String bookingDate, String bookingStatus, String specialRequests, double totalPrice, double taxes, String guestName, String guestEmail, String guestPhone, String userId) {
+    //Services
+    private String bookingTime;
+    private String serviceId;
+    private String duration;
+
+    //getData
+    public Booking(int bookingId, String bookingTitle, String bookingType, String checkInDate, String checkOutDate, String bookingDate, String bookingStatus, String specialRequests, double totalPrice, double taxes, String guestName, String guestEmail, String guestPhone, String userId, String roomId, String bookingTime, String serviceId, String duration) {
         this.bookingId = bookingId;
         this.bookingTitle = bookingTitle;
         this.bookingType = bookingType;
@@ -31,9 +38,14 @@ public class Booking {
         this.guestEmail = guestEmail;
         this.guestPhone = guestPhone;
         this.userId = userId;
+        this.roomId = roomId;
+        this.bookingTime = bookingTime;
+        this.serviceId = serviceId;
+        this.duration = duration;
     }
 
-    public Booking(String bookingTitle, String bookingType, String checkInDate, String checkOutDate, String bookingDate, String bookingStatus, String specialRequests, double totalPrice, double taxes, String guestName, String guestEmail, String guestPhone, String userId) {
+    //Room
+    public Booking(String bookingTitle, String bookingType, String checkInDate, String checkOutDate, String bookingDate, String bookingStatus, String specialRequests, double totalPrice, double taxes, String guestName, String guestEmail, String guestPhone, String userId, String roomId) {
         this.bookingTitle = bookingTitle;
         this.bookingType = bookingType;
         this.checkInDate = checkInDate;
@@ -47,6 +59,25 @@ public class Booking {
         this.guestEmail = guestEmail;
         this.guestPhone = guestPhone;
         this.userId = userId;
+        this.roomId = roomId;
+    }
+
+    //SpaService
+    public Booking(String bookingTitle, String bookingType, String bookingDate, String bookingStatus, String specialRequests, double totalPrice, double taxes, String guestName, String guestEmail, String guestPhone, String userId, String bookingTime, String serviceId, String duration) {
+        this.bookingTitle = bookingTitle;
+        this.bookingType = bookingType;
+        this.bookingDate = bookingDate;
+        this.bookingStatus = bookingStatus;
+        this.specialRequests = specialRequests;
+        this.totalPrice = totalPrice;
+        this.taxes = taxes;
+        this.guestName = guestName;
+        this.guestEmail = guestEmail;
+        this.guestPhone = guestPhone;
+        this.userId = userId;
+        this.bookingTime = bookingTime;
+        this.serviceId = serviceId;
+        this.duration = duration;
     }
 
     public int getBookingId() {
@@ -159,5 +190,36 @@ public class Booking {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getRoomId() {
+        return roomId;
+    }
+    public void setRoomId(String roomId) {
+        this.roomId = roomId;
+    }
+
+    public String getBookingTime() {
+        return bookingTime;
+    }
+
+    public void setBookingTime(String bookingTime) {
+        this.bookingTime = bookingTime;
+    }
+
+    public String getServiceId() {
+        return serviceId;
+    }
+
+    public void setServiceId(String serviceId) {
+        this.serviceId = serviceId;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
     }
 }

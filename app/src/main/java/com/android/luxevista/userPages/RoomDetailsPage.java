@@ -42,9 +42,8 @@ import java.util.Locale;
 public class RoomDetailsPage extends AppCompatActivity {
 
     private TextView txtRoomType, txtRoomPrice, txtRoomSize, txtRoomView, txtRoomOccupancy, txtRoomAmenities, txtRoomServices, txtCheckIn, txtRoomCheckOut, txtRoomCancellation, txtRoomSmoking;
-    private CalendarView calendarView;
     private ImageView coverImage;
-    private LinearLayout btnBookNow;
+    private LinearLayout btnBookNow, btnProfile;
     private RoomDB roomDB;
     private Room room;
     private int roomId = 0;
@@ -82,13 +81,21 @@ public class RoomDetailsPage extends AppCompatActivity {
         txtRoomSmoking = findViewById(R.id.txtRoomSmoking);
         coverImage = findViewById(R.id.coverImage);
         btnBookNow = findViewById(R.id.btnBookNow);
+        btnProfile = findViewById(R.id.btnProfile);
 
         setData();
         bookButton();
         setCalendar();
         imageSlider();
-    }
 
+        btnProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ProfilePage.class);
+                startActivity(intent);
+            }
+        });
+    }
     private void imageSlider(){
         imageUriList = new ArrayList<>();
         List<String> imagePaths = room.getAdditionalImages();
@@ -105,7 +112,7 @@ public class RoomDetailsPage extends AppCompatActivity {
     }
     private void setCalendar(){
         bookingDB = new BookingDB(this);
-        bookings = bookingDB.getAllBookings();
+        bookings = bookingDB.getAllBookingsByRoomId(roomId);
         bookingDates = new ArrayList<>();
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -177,12 +184,10 @@ public class RoomDetailsPage extends AppCompatActivity {
             }
         });
     }
-
     private void startAutoSlide() {
         sliderHandler.removeCallbacks(sliderRunnable);
         sliderHandler.postDelayed(sliderRunnable, 5000);
     }
-
     private final Runnable sliderRunnable = new Runnable() {
         @Override
         public void run() {
@@ -191,7 +196,6 @@ public class RoomDetailsPage extends AppCompatActivity {
             sliderHandler.postDelayed(this, 5000);
         }
     };
-
     @Override
     protected void onPause() {
         super.onPause();
