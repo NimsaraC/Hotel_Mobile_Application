@@ -50,7 +50,7 @@ public class HomePageRoomAdapter extends RecyclerView.Adapter<HomePageRoomAdapte
 
         Picasso.get()
                 .load(imageUri)
-                .placeholder(R.drawable.ic_launcher_background)
+                .placeholder(R.drawable.home_screen)
                 .error(R.drawable.home_screen)
                 .into(holder.imvCover);
 

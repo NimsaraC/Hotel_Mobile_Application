@@ -51,7 +51,7 @@ public class HomePageServiceAdapter extends RecyclerView.Adapter<HomePageService
 
         Picasso.get()
                 .load(imageUri)
-                .placeholder(R.drawable.ic_launcher_background)
+                .placeholder(R.drawable.home_screen)
                 .error(R.drawable.home_screen)
                 .into(holder.imvCover);
 

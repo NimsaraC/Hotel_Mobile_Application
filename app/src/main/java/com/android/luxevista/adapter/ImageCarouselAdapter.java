@@ -38,7 +38,7 @@ public class ImageCarouselAdapter extends RecyclerView.Adapter<ImageCarouselAdap
         Uri imageUri = imageUris.get(position);
         Picasso.get()
                 .load(imageUri.toString().trim())
-                .placeholder(R.drawable.ic_launcher_background)
+                .placeholder(R.drawable.home_screen)
                 .error(R.drawable.home_screen)
                 .into(holder.imageView);
 

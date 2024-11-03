@@ -1,8 +1,11 @@
 package com.android.luxevista.userPages;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
@@ -17,19 +20,29 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.android.luxevista.R;
 import com.android.luxevista.Room;
+import com.android.luxevista.adapter.ImageCarouselAdapter;
 import com.android.luxevista.database.RoomDB;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class HomePage extends AppCompatActivity {
 
+
+    // Banner
+    private ViewPager2 viewPager;
+    private ImageCarouselAdapter adapter;
+    private Handler sliderHandler = new Handler(Looper.getMainLooper());
+
+    //Main
+
     private TabLayout tabLayout;
-    private FrameLayout frameLayout;
     private LinearLayout navRooms, navServices, navExplore, navProfile, btnProfile;
     private boolean doubleBackToExitPressedOnce = false;
     private RoomDB roomDB;
@@ -50,7 +63,6 @@ public class HomePage extends AppCompatActivity {
         roomDB = new RoomDB(this);
 
         tabLayout = findViewById(R.id.tabLayout);
-        frameLayout = findViewById(R.id.frameHomepage);
 
         navServices = findViewById(R.id.linearLayoutServices);
         navExplore = findViewById(R.id.linearLayoutExplore);
@@ -59,6 +71,7 @@ public class HomePage extends AppCompatActivity {
         btnProfile = findViewById(R.id.btnProfile);
 
         bottomNav();
+        banners();
 
         roomList = roomDB.getAllRooms();
 
@@ -159,5 +172,56 @@ public class HomePage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void banners(){
+
+        List<String> imagePaths = Arrays.asList(
+                "banner_1",
+                "banner_2",
+                "banner_3"
+        );
+
+        List<Uri> newImagePaths = new ArrayList<>();
+        for (String imageName : imagePaths) {
+            int resourceId = getResources().getIdentifier(imageName, "drawable", getPackageName());
+            if (resourceId != 0) {
+                Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + resourceId);
+                newImagePaths.add(uri);
+            } else {
+                Log.e("ResourceError", "Drawable resource not found for name: " + imageName);
+            }
+        }
+        viewPager = findViewById(R.id.viewPager);
+        adapter = new ImageCarouselAdapter(this, newImagePaths);
+        viewPager.setAdapter(adapter);
+
+        startAutoSlide();
+    }
+
+    private void startAutoSlide() {
+        sliderHandler.removeCallbacks(sliderRunnable);
+        sliderHandler.postDelayed(sliderRunnable, 5000);
+    }
+
+    private final Runnable sliderRunnable = new Runnable() {
+        @Override
+        public void run() {
+            int nextItem = (viewPager.getCurrentItem() + 1) % adapter.getItemCount();
+            viewPager.setCurrentItem(nextItem, true);
+            sliderHandler.postDelayed(this, 5000);
+        }
+    };
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        sliderHandler.removeCallbacks(sliderRunnable);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        startAutoSlide();
     }
 }
