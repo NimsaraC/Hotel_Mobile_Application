@@ -25,8 +25,11 @@ public class Booking {
     private String capacity;
     private String dayType;
 
+    //Explore
+    private String exploreId;
+
     //getData
-    public Booking(int bookingId, String bookingTitle, String bookingType, String checkInDate, String checkOutDate, String bookingDate, String bookingStatus, String specialRequests, double totalPrice, double taxes, String guestName, String guestEmail, String guestPhone, String userId, String roomId, String bookingTime, String serviceId, String duration, String numberOfGuests, String capacity, String dayType) {
+    public Booking(int bookingId, String bookingTitle, String bookingType, String checkInDate, String checkOutDate, String bookingDate, String bookingStatus, String specialRequests, double totalPrice, double taxes, String guestName, String guestEmail, String guestPhone, String userId, String roomId, String bookingTime, String serviceId, String duration, String numberOfGuests, String capacity, String dayType, String exploreId) {
         this.bookingId = bookingId;
         this.bookingTitle = bookingTitle;
         this.bookingType = bookingType;
@@ -48,6 +51,7 @@ public class Booking {
         this.numberOfGuests = numberOfGuests;
         this.capacity = capacity;
         this.dayType = dayType;
+        this.exploreId = exploreId;
     }
 
     //Room
@@ -118,6 +122,22 @@ public class Booking {
         this.serviceId = serviceId;
         this.capacity = capacity;
         this.dayType = dayType;
+    }
+
+    //Explore
+    public Booking(String bookingTitle, String bookingType, String bookingDate, String bookingStatus, String specialRequests, double totalPrice, String guestName, String guestEmail, String guestPhone, String userId, String exploreId, String numberOfGuests) {
+        this.bookingTitle = bookingTitle;
+        this.bookingType = bookingType;
+        this.bookingDate = bookingDate;
+        this.bookingStatus = bookingStatus;
+        this.specialRequests = specialRequests;
+        this.totalPrice = totalPrice;
+        this.guestName = guestName;
+        this.guestEmail = guestEmail;
+        this.guestPhone = guestPhone;
+        this.userId = userId;
+        this.exploreId = exploreId;
+        this.numberOfGuests = numberOfGuests;
     }
 
     public int getBookingId() {
@@ -285,5 +305,13 @@ public class Booking {
 
     public void setDayType(String dayType) {
         this.dayType = dayType;
+    }
+
+    public String getExploreId() {
+        return exploreId;
+    }
+
+    public void setExploreId(String exploreId) {
+        this.exploreId = exploreId;
     }
 }

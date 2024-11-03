@@ -32,7 +32,7 @@ public class AdminHomePageTemp extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AdminHomePageTemp.this, AddExplorePage.class);
-                intent.putExtra("message", "Local Attractions");
+                intent.putExtra("message", "Dining & Nightlife");
                 startActivity(intent);
             }
         });

@@ -37,6 +37,7 @@ public class BookingDB extends SQLiteOpenHelper {
     private static final String NUMBER_OF_GUESTS = "numberOfGuests";
     private static final String CAPACITY = "capacity";
     private static final String DAY_TYPE = "dayType";
+    private static final String EXPLORE_ID = "exploreId";
 
     private static final String TABLE_CREATE =
             "CREATE TABLE " + TABLE_NAME + " (" +
@@ -60,7 +61,8 @@ public class BookingDB extends SQLiteOpenHelper {
                     DURATION + " TEXT," +
                     NUMBER_OF_GUESTS + " TEXT," +
                     CAPACITY + " TEXT," +
-                    DAY_TYPE + " TEXT" +
+                    DAY_TYPE + " TEXT," +
+                    EXPLORE_ID + " TEXT" +
                     ");";
 
     public BookingDB(Context context) {
@@ -101,6 +103,7 @@ public class BookingDB extends SQLiteOpenHelper {
         values.put(NUMBER_OF_GUESTS, booking.getNumberOfGuests());
         values.put(CAPACITY, booking.getCapacity());
         values.put(DAY_TYPE, booking.getDayType());
+        values.put(EXPLORE_ID, booking.getExploreId());
 
         Long result = db.insert(TABLE_NAME, null, values);
         db.close();
@@ -137,7 +140,8 @@ public class BookingDB extends SQLiteOpenHelper {
                         cursor.getString(cursor.getColumnIndexOrThrow(DURATION)),
                         cursor.getString(cursor.getColumnIndexOrThrow(NUMBER_OF_GUESTS)),
                         cursor.getString(cursor.getColumnIndexOrThrow(CAPACITY)),
-                        cursor.getString(cursor.getColumnIndexOrThrow(DAY_TYPE))
+                        cursor.getString(cursor.getColumnIndexOrThrow(DAY_TYPE)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(EXPLORE_ID))
                 );
             }
             cursor.close();
@@ -178,7 +182,8 @@ public class BookingDB extends SQLiteOpenHelper {
                             cursor.getString(cursor.getColumnIndexOrThrow(DURATION)),
                             cursor.getString(cursor.getColumnIndexOrThrow(NUMBER_OF_GUESTS)),
                             cursor.getString(cursor.getColumnIndexOrThrow(CAPACITY)),
-                            cursor.getString(cursor.getColumnIndexOrThrow(DAY_TYPE))
+                            cursor.getString(cursor.getColumnIndexOrThrow(DAY_TYPE)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(EXPLORE_ID))
 
                     );
 
@@ -223,7 +228,8 @@ public class BookingDB extends SQLiteOpenHelper {
                             cursor.getString(cursor.getColumnIndexOrThrow(DURATION)),
                             cursor.getString(cursor.getColumnIndexOrThrow(NUMBER_OF_GUESTS)),
                             cursor.getString(cursor.getColumnIndexOrThrow(CAPACITY)),
-                            cursor.getString(cursor.getColumnIndexOrThrow(DAY_TYPE))
+                            cursor.getString(cursor.getColumnIndexOrThrow(DAY_TYPE)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(EXPLORE_ID))
 
                     );
 
@@ -268,7 +274,54 @@ public class BookingDB extends SQLiteOpenHelper {
                             cursor.getString(cursor.getColumnIndexOrThrow(DURATION)),
                             cursor.getString(cursor.getColumnIndexOrThrow(NUMBER_OF_GUESTS)),
                             cursor.getString(cursor.getColumnIndexOrThrow(CAPACITY)),
-                            cursor.getString(cursor.getColumnIndexOrThrow(DAY_TYPE))
+                            cursor.getString(cursor.getColumnIndexOrThrow(DAY_TYPE)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(EXPLORE_ID))
+
+                    );
+
+                    bookingList.add(booking);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        }
+
+        db.close();
+        return bookingList;
+    }
+
+    public List<Booking> getAllBookingsByExploreId(int exploreId) {
+        List<Booking> bookingList = new ArrayList<>();
+
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + EXPLORE_ID + " = ?";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(exploreId)});
+
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                do {
+                    Booking booking = new Booking(
+                            cursor.getInt(cursor.getColumnIndexOrThrow(BOOKING_ID)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(BOOKING_TITLE)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(BOOKING_TYPE)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(CHECKIN_DATE)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(CHECKOUT_DATE)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(BOOKING_DATE)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(BOOKING_STATUS)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(SPECIAL_REQUESTS)),
+                            cursor.getDouble(cursor.getColumnIndexOrThrow(TOTAL_PRICE)),
+                            cursor.getDouble(cursor.getColumnIndexOrThrow(TAXES)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(GUEST_NAME)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(GUEST_EMAIL)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(GUEST_PHONE)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(GUEST_ID)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(ROOM_ID)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(BOOKING_TIME)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(SERVICE_ID)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(DURATION)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(NUMBER_OF_GUESTS)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(CAPACITY)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(DAY_TYPE)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(EXPLORE_ID))
 
                     );
 
