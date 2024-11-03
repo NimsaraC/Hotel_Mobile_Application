@@ -1,6 +1,7 @@
 package com.android.luxevista.userPages;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,6 +21,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.android.luxevista.Booking;
+import com.android.luxevista.EventDecorator;
 import com.android.luxevista.LuxeService;
 import com.android.luxevista.R;
 import com.android.luxevista.User;
@@ -31,12 +33,16 @@ import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 import com.squareup.picasso.Picasso;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
-public class DiningBookingPage extends AppCompatActivity {
-    private TextView txtType, txtCuisine, txtPrice, txtTotalPrice, txtFee, txtFinalPrice, txtDate;
+public class PoolServiceBookingPage extends AppCompatActivity {
+    private TextView txtType, txtCapacity, txtPrice, txtHalfPrice, txtDate, txtTotalPrice, txtFee, txtFinalPrice;
     private LinearLayout btnPayNow;
-    private Spinner spinnerGuests;
+    private Spinner spinnerType;
     private MaterialCalendarView calendarView;
     private EditText edtName, edtEmail, edtPhone, edtSpecialReq ;
     private CheckBox checkbox;
@@ -50,14 +56,15 @@ public class DiningBookingPage extends AppCompatActivity {
     private User user;
     private Booking booking;
     private double fee;
-    double basePrice = 50;
-    double totalPrice;
+    private double totalPrice, finalPrice;
+    private List<Booking> bookings;
+    private List<String> bookingDates;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_dining_booking_page);
+        setContentView(R.layout.activity_pool_service_booking_page);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -71,43 +78,81 @@ public class DiningBookingPage extends AppCompatActivity {
         serviceId = getIntent().getIntExtra("serviceId", 0);
 
         service = db.getServiceById(serviceId);
+        fee = 12;
 
         findComponents();
         setCalendar();
-        setDiningPrice();
-        setGuestDetails();
+        setBookingPrice();
         setServiceDetails();
+        setGuestDetails();
         saveBooking();
 
     }
+    private void setCalendar(){
+        bookingDB = new BookingDB(this);
+        bookings = bookingDB.getAllBookingsByServiceId(serviceId);
+        bookingDates = new ArrayList<>();
 
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        for (Booking booking : bookings) {
+            String checkInDateStr = booking.getBookingDate();
+            bookingDates.add(checkInDateStr);
+        }
+        HashSet<CalendarDay> dates = new HashSet<>();
+        for (String dateString : bookingDates) {
+            String[] parts = dateString.split("-");
+            int year = Integer.parseInt(parts[0]);
+            int month = Integer.parseInt(parts[1]) - 1;
+            int day = Integer.parseInt(parts[2]);
+            dates.add(CalendarDay.from(year, month, day));
+        }
+
+        calendarView.setEnabled(false);
+        calendarView.addDecorator(new EventDecorator(Color.RED, dates));
+
+        calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
+            @Override
+            public void onDateSelected(MaterialCalendarView widget, CalendarDay date, boolean selected) {
+                String formattedDate = date.getYear() + "-" + (date.getMonth() + 1) + "-" + date.getDay();
+                if (bookingDates.contains(formattedDate)) {
+                    Toast.makeText(PoolServiceBookingPage.this, "Date is not available", Toast.LENGTH_SHORT).show();
+                }else{
+                    txtDate.setText(formattedDate);
+
+                }
+            }
+        });
+    }
     private void saveBooking() {
         btnPayNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String serviceID = String.valueOf(serviceId);
+                String capacity = String.valueOf(service.getCapacity());
+                String dayType = spinnerType.getSelectedItem().toString();
                 if (txtDate.getText().toString().isEmpty() ||
                         edtName.getText().toString().isEmpty() || edtEmail.getText().toString().isEmpty() ||
                         edtPhone.getText().toString().isEmpty())
                 {
-                    Toast.makeText(DiningBookingPage.this, "Please fill all the required fields", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PoolServiceBookingPage.this, "Please fill all the required fields", Toast.LENGTH_SHORT).show();
                 }else{
                     if(checkbox.isChecked()){
 
                         booking = new Booking(
-                                "Dining",
+                                "Pool",
                                 service.getServiceType(),
                                 txtDate.getText().toString(),
                                 "confirmed",
                                 edtSpecialReq.getText().toString(),
                                 totalPrice,
-                                fee,
                                 edtName.getText().toString(),
                                 edtEmail.getText().toString(),
                                 edtPhone.getText().toString(),
                                 "1",
                                 serviceID,
-                                spinnerGuests.getSelectedItem().toString()
+                                capacity,
+                                dayType
                         );
 
                         Long result = bookingDB.insertBooking(booking);
@@ -120,15 +165,58 @@ public class DiningBookingPage extends AppCompatActivity {
                         }
 
                     }else{
-                        Toast.makeText(DiningBookingPage.this, "Please Accept the therms and condition", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(PoolServiceBookingPage.this, "Please Accept the therms and condition", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
         });
     }
+    private void setBookingPrice() {
+        String[] Type = new String[]{
+                "Full Day",
+                "Half Day"
+        };
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                this,
+                R.layout.spinner_selected_item,
+                Type
+        );
+
+        adapter.setDropDownViewResource(R.layout.spinner_selected_item_list);
+        spinnerType.setAdapter(adapter);
+        spinnerType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(spinnerType.getSelectedItem().toString().equals("Full Day")){
+                    txtTotalPrice.setText(String.format("$ %.2f", totalPrice));
+                }else{
+                    totalPrice = totalPrice/2;
+                    txtTotalPrice.setText(String.format("$ %.2f", totalPrice));
+                    txtFee.setText(String.format("$ %.2f", fee/2));
+                    finalPrice = (fee/2) + totalPrice;
+                    txtFinalPrice.setText(String.format("$ %.2f", finalPrice));
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
     private void setServiceDetails() {
         txtType.setText(service.getServiceType());
-        txtCuisine.setText(service.getCuisine());
+        txtCapacity.setText(String.format("Up to %s guests", service.getCapacity()));
+        txtPrice.setText(String.format("$%s for full day", service.getPrice()));
+        txtHalfPrice.setText(String.format("$%s for half-day", service.getPrice()/2));
+        totalPrice = service.getPrice();
+        fee = (totalPrice * fee)/100;
+        finalPrice = totalPrice + fee;
+        txtTotalPrice.setText(String.format("$ %.2f", totalPrice));
+        txtFee.setText(String.format("$ %.2f", fee));
+        txtFinalPrice.setText(String.format("$ %.2f", finalPrice));
+
         Picasso.get()
                 .load(service.getCoverImage())
                 .placeholder(R.drawable.ic_launcher_background)
@@ -144,66 +232,25 @@ public class DiningBookingPage extends AppCompatActivity {
             edtPhone.setText(user.getPhone());
         }
     }
-    private void setDiningPrice() {
-        String[] Guests = new String[]{
-                "1 Guest",
-                "2 Guests",
-                "3 Guests",
-                "4 Guests"
-        };
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                this,
-                R.layout.spinner_selected_item,
-                Guests
-        );
-
-        adapter.setDropDownViewResource(R.layout.spinner_selected_item_list);
-        spinnerGuests.setAdapter(adapter);
-        spinnerGuests.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+    private void KsetCalendar() {
+        calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (spinnerGuests.getSelectedItem().toString().equals("1 Guest")){
-                    calTotal(1);
-                }else if (spinnerGuests.getSelectedItem().toString().equals("2 Guests")){
-                    calTotal(2);
-                } else if (spinnerGuests.getSelectedItem().toString().equals("3 Guests")) {
-                    calTotal(3);
-                }else {
-                    calTotal(4);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+            public void onDateSelected(MaterialCalendarView widget, CalendarDay date, boolean selected) {
+                String formattedDate = date.getYear() + "-" + (date.getMonth() + 1) + "-" + date.getDay();
+                txtDate.setText(formattedDate);
             }
         });
     }
-    private void calTotal(int guests){
-        service = db.getServiceById(serviceId);
-
-        fee = 12;
-        double basePrice = 50;
-        double totalPrice = basePrice * guests;
-        fee = (totalPrice * fee)/100;
-        double finalPrice = totalPrice + fee;
-
-        txtPrice.setText(String.format("$ %.2f per persone", basePrice));
-        txtTotalPrice.setText(String.format("$ %.2f", totalPrice));
-        txtFee.setText(String.format("$ %.2f", fee));
-        txtFinalPrice.setText(String.format("$ %.2f", finalPrice));
-
-    }
     private void findComponents() {
-
         txtType = findViewById(R.id.txtType);
         txtPrice = findViewById(R.id.txtPrice);
-        txtCuisine = findViewById(R.id.txtCuisine);
+        txtHalfPrice = findViewById(R.id.txtHalfPrice);
+        txtCapacity = findViewById(R.id.txtCapacity);
         txtTotalPrice = findViewById(R.id.txtTotalPrice);
         txtFee = findViewById(R.id.txtFee);
         txtFinalPrice = findViewById(R.id.txtFinalPrice);
         txtDate = findViewById(R.id.txtDate);
-        spinnerGuests = findViewById(R.id.spinnerGuests);
+        spinnerType = findViewById(R.id.spinnerType);
         calendarView = findViewById(R.id.calendarView);
         edtName = findViewById(R.id.edtName);
         edtEmail = findViewById(R.id.edtEmail);
@@ -212,14 +259,5 @@ public class DiningBookingPage extends AppCompatActivity {
         checkbox = findViewById(R.id.checkbox);
         btnPayNow = findViewById(R.id.btnPayNow);
         coverImage = findViewById(R.id.coverImage);
-    }
-    private void setCalendar() {
-        calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
-            @Override
-            public void onDateSelected(MaterialCalendarView widget, CalendarDay date, boolean selected) {
-                String formattedDate = date.getYear() + "-" + (date.getMonth() + 1) + "-" + date.getDay();
-                txtDate.setText(formattedDate);
-            }
-        });
     }
 }

@@ -35,6 +35,8 @@ public class BookingDB extends SQLiteOpenHelper {
     private static final String SERVICE_ID = "serviceId";
     private static final String DURATION = "duration";
     private static final String NUMBER_OF_GUESTS = "numberOfGuests";
+    private static final String CAPACITY = "capacity";
+    private static final String DAY_TYPE = "dayType";
 
     private static final String TABLE_CREATE =
             "CREATE TABLE " + TABLE_NAME + " (" +
@@ -56,7 +58,9 @@ public class BookingDB extends SQLiteOpenHelper {
                     BOOKING_TIME + " TEXT," +
                     SERVICE_ID + " TEXT," +
                     DURATION + " TEXT," +
-                    NUMBER_OF_GUESTS + " TEXT" +
+                    NUMBER_OF_GUESTS + " TEXT," +
+                    CAPACITY + " TEXT," +
+                    DAY_TYPE + " TEXT" +
                     ");";
 
     public BookingDB(Context context) {
@@ -95,6 +99,8 @@ public class BookingDB extends SQLiteOpenHelper {
         values.put(SERVICE_ID, booking.getServiceId());
         values.put(DURATION, booking.getDuration());
         values.put(NUMBER_OF_GUESTS, booking.getNumberOfGuests());
+        values.put(CAPACITY, booking.getCapacity());
+        values.put(DAY_TYPE, booking.getDayType());
 
         Long result = db.insert(TABLE_NAME, null, values);
         db.close();
@@ -129,7 +135,9 @@ public class BookingDB extends SQLiteOpenHelper {
                         cursor.getString(cursor.getColumnIndexOrThrow(BOOKING_TIME)),
                         cursor.getString(cursor.getColumnIndexOrThrow(SERVICE_ID)),
                         cursor.getString(cursor.getColumnIndexOrThrow(DURATION)),
-                        cursor.getString(cursor.getColumnIndexOrThrow(NUMBER_OF_GUESTS))
+                        cursor.getString(cursor.getColumnIndexOrThrow(NUMBER_OF_GUESTS)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(CAPACITY)),
+                        cursor.getString(cursor.getColumnIndexOrThrow(DAY_TYPE))
                 );
             }
             cursor.close();
@@ -168,7 +176,9 @@ public class BookingDB extends SQLiteOpenHelper {
                             cursor.getString(cursor.getColumnIndexOrThrow(BOOKING_TIME)),
                             cursor.getString(cursor.getColumnIndexOrThrow(SERVICE_ID)),
                             cursor.getString(cursor.getColumnIndexOrThrow(DURATION)),
-                            cursor.getString(cursor.getColumnIndexOrThrow(NUMBER_OF_GUESTS))
+                            cursor.getString(cursor.getColumnIndexOrThrow(NUMBER_OF_GUESTS)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(CAPACITY)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(DAY_TYPE))
 
                     );
 
@@ -211,7 +221,9 @@ public class BookingDB extends SQLiteOpenHelper {
                             cursor.getString(cursor.getColumnIndexOrThrow(BOOKING_TIME)),
                             cursor.getString(cursor.getColumnIndexOrThrow(SERVICE_ID)),
                             cursor.getString(cursor.getColumnIndexOrThrow(DURATION)),
-                            cursor.getString(cursor.getColumnIndexOrThrow(NUMBER_OF_GUESTS))
+                            cursor.getString(cursor.getColumnIndexOrThrow(NUMBER_OF_GUESTS)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(CAPACITY)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(DAY_TYPE))
 
                     );
 
@@ -254,7 +266,9 @@ public class BookingDB extends SQLiteOpenHelper {
                             cursor.getString(cursor.getColumnIndexOrThrow(BOOKING_TIME)),
                             cursor.getString(cursor.getColumnIndexOrThrow(SERVICE_ID)),
                             cursor.getString(cursor.getColumnIndexOrThrow(DURATION)),
-                            cursor.getString(cursor.getColumnIndexOrThrow(NUMBER_OF_GUESTS))
+                            cursor.getString(cursor.getColumnIndexOrThrow(NUMBER_OF_GUESTS)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(CAPACITY)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(DAY_TYPE))
 
                     );
 

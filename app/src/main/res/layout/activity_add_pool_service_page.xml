@@ -276,11 +276,11 @@
                             android:id="@+id/textView2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Sign up"
+                            android:fontFamily="@font/title"
+                            android:text="Add Service"
                             android:textAlignment="center"
                             android:textColor="@color/background"
                             android:textSize="25dp"
-                            android:fontFamily="@font/title"
                             android:textStyle="bold" />
 
                     </LinearLayout>

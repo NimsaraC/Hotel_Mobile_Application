@@ -22,9 +22,11 @@ public class Booking {
     private String serviceId;
     private String duration;
     private String numberOfGuests;
+    private String capacity;
+    private String dayType;
 
     //getData
-    public Booking(int bookingId, String bookingTitle, String bookingType, String checkInDate, String checkOutDate, String bookingDate, String bookingStatus, String specialRequests, double totalPrice, double taxes, String guestName, String guestEmail, String guestPhone, String userId, String roomId, String bookingTime, String serviceId, String duration, String numberOfGuests) {
+    public Booking(int bookingId, String bookingTitle, String bookingType, String checkInDate, String checkOutDate, String bookingDate, String bookingStatus, String specialRequests, double totalPrice, double taxes, String guestName, String guestEmail, String guestPhone, String userId, String roomId, String bookingTime, String serviceId, String duration, String numberOfGuests, String capacity, String dayType) {
         this.bookingId = bookingId;
         this.bookingTitle = bookingTitle;
         this.bookingType = bookingType;
@@ -44,6 +46,8 @@ public class Booking {
         this.serviceId = serviceId;
         this.duration = duration;
         this.numberOfGuests = numberOfGuests;
+        this.capacity = capacity;
+        this.dayType = dayType;
     }
 
     //Room
@@ -82,6 +86,7 @@ public class Booking {
         this.duration = duration;
     }
 
+    //Dining
     public Booking(String bookingTitle, String bookingType, String bookingDate, String bookingStatus, String specialRequests, double totalPrice, double taxes, String guestName, String guestEmail, String guestPhone, String userId, String serviceId, String numberOfGuests) {
         this.bookingTitle = bookingTitle;
         this.bookingType = bookingType;
@@ -98,7 +103,22 @@ public class Booking {
         this.numberOfGuests = numberOfGuests;
     }
 
-
+    //PoolService
+    public Booking(String bookingTitle, String bookingType, String bookingDate, String bookingStatus, String specialRequests, double totalPrice, String guestName, String guestEmail, String guestPhone, String userId, String serviceId, String capacity, String dayType) {
+        this.bookingTitle = bookingTitle;
+        this.bookingType = bookingType;
+        this.bookingDate = bookingDate;
+        this.bookingStatus = bookingStatus;
+        this.specialRequests = specialRequests;
+        this.totalPrice = totalPrice;
+        this.guestName = guestName;
+        this.guestEmail = guestEmail;
+        this.guestPhone = guestPhone;
+        this.userId = userId;
+        this.serviceId = serviceId;
+        this.capacity = capacity;
+        this.dayType = dayType;
+    }
 
     public int getBookingId() {
         return bookingId;
@@ -249,5 +269,21 @@ public class Booking {
 
     public void setNumberOfGuests(String numberOfGuests) {
         this.numberOfGuests = numberOfGuests;
+    }
+
+    public String getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(String capacity) {
+        this.capacity = capacity;
+    }
+
+    public String getDayType() {
+        return dayType;
+    }
+
+    public void setDayType(String dayType) {
+        this.dayType = dayType;
     }
 }

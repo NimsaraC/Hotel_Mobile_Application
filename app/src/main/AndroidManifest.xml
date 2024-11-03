@@ -15,6 +15,9 @@
         android:theme="@style/Theme.LuxeVista"
         tools:targetApi="31">
         <activity
+            android:name=".userPages.PoolServiceBookingPage"
+            android:exported="false" />
+        <activity
             android:name=".userPages.DiningBookingPage"
             android:exported="false" />
         <activity
