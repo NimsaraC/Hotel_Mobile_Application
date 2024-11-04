@@ -98,6 +98,7 @@
                         android:layout_height="80dp">
 
                         <LinearLayout
+                            android:id="@+id/btnProfile"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@color/card"

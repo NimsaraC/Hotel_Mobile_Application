@@ -28,6 +28,7 @@ public class UserDB extends SQLiteOpenHelper {
     private static final String USER_LOGINSTATUS = "loginStatus";
     private static final String USER_IMAGEURL = "imageUrl";
     private static final String USER_GENDER = "gender";
+    private static final String USER_BIRTHDAY = "birthday";
 
     private static final String TABLE_CREATE =
             "CREATE TABLE " + TABLE_NAME + " (" +
@@ -43,7 +44,8 @@ public class UserDB extends SQLiteOpenHelper {
                     USER_COUNTY + " TEXT, " +
                     USER_LOGINSTATUS + " BOOLEAN DEFAULT 0, " +
                     USER_IMAGEURL + " TEXT, " +
-                    USER_GENDER +" TEXT" +
+                    USER_GENDER +" TEXT," +
+                    USER_BIRTHDAY + " TEXT" +
                     ");";
 
     public UserDB(Context context) {
@@ -72,6 +74,28 @@ public class UserDB extends SQLiteOpenHelper {
         db.close();
         return result;
     }
+    public int editUserById(int id, User user) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(USER_NAME, user.getName());
+        values.put(USER_USERNAME, user.getUsername());
+        values.put(USER_EMAIL, user.getEmail());
+        values.put(USER_PASSWORD, user.getPassword());
+        values.put(USER_PHONE, user.getPhone());
+        values.put(USER_ADDRESS, user.getAddress());
+        values.put(USER_CITY, user.getCity());
+        values.put(USER_POSTALCODE, user.getPostalCode());
+        values.put(USER_COUNTY, user.getCounty());
+        values.put(USER_LOGINSTATUS, user.getLoginStatus());
+        values.put(USER_IMAGEURL, user.getImageUrl());
+        values.put(USER_GENDER, user.getGender());
+        values.put(USER_BIRTHDAY, user.getBirthDay());
+
+        int rowsAffected = db.update(TABLE_NAME, values, USER_ID + " = ?", new String[]{String.valueOf(id)});
+        db.close();
+        return rowsAffected;
+    }
     public int userLogin(String email, String password) {
         SQLiteDatabase db = this.getReadableDatabase();
         int id = 0;
@@ -92,8 +116,6 @@ public class UserDB extends SQLiteOpenHelper {
         String query = "SELECT * FROM User WHERE " + USER_ID +" = ?";
 
         Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(id)});
-        //Cursor cursor = db.query(TABLE_NAME, null, USER_ID + "=?", new String[]{String.valueOf(id)}, null, null, null);
-
 
         if (cursor.moveToFirst()) {
             user = new User(
@@ -109,7 +131,8 @@ public class UserDB extends SQLiteOpenHelper {
                     cursor.getString(cursor.getColumnIndexOrThrow(USER_COUNTY)),
                     cursor.getInt(cursor.getColumnIndexOrThrow(USER_LOGINSTATUS)) == 1,
                     cursor.getString(cursor.getColumnIndexOrThrow(USER_IMAGEURL)),
-                    cursor.getString(cursor.getColumnIndexOrThrow(USER_GENDER))
+                    cursor.getString(cursor.getColumnIndexOrThrow(USER_GENDER)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(USER_BIRTHDAY))
             );
         }
 

@@ -235,7 +235,7 @@ public class AddRoomPage extends AppCompatActivity {
                 try (OutputStream outputStream = new FileOutputStream(file)) {
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
                 }
-                return file.getAbsolutePath();  // Return the internal file path
+                return file.getAbsolutePath();
             }
 
         } catch (IOException e) {

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -22,11 +23,13 @@ import com.android.luxevista.R;
 import com.android.luxevista.SharedPreference;
 import com.android.luxevista.User;
 import com.android.luxevista.database.UserDB;
+import com.squareup.picasso.Picasso;
 
 public class ProfilePage extends AppCompatActivity {
 
-    private LinearLayout navRooms, navServices, navExplore, navBooking, btnSignout;
+    private LinearLayout navRooms, navServices, navExplore, navBooking, btnSignout, btnProfile;
     private TextView profileName, profileEmail;
+    private ImageView profilePic;
     private UserDB db;
     private User user;
 
@@ -51,13 +54,27 @@ public class ProfilePage extends AppCompatActivity {
         navBooking = findViewById(R.id.linearLayoutProfile);
 
         btnSignout = findViewById(R.id.btnSignout);
+        btnProfile = findViewById(R.id.btnProfile);
 
         profileName = findViewById(R.id.profileName);
         profileEmail = findViewById(R.id.profileEmail);
+        profilePic = findViewById(R.id.profilePic);
 
         setUserData(userID);
         bottomNav();
         signOut();
+        buttons(userID);
+    }
+
+    private void buttons(int userID) {
+        btnProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfilePage.this, PersonalDetailsPage.class);
+                intent.putExtra("userId", userID);
+                startActivity(intent);
+            }
+        });
     }
 
     private void signOut() {
@@ -94,6 +111,15 @@ public class ProfilePage extends AppCompatActivity {
         user = db.getUserById(userID);
         profileName.setText(user.getUsername());
         profileEmail.setText(user.getEmail());
+        if(user.getImageUrl() != null){
+            Picasso.get()
+                    .load(user.getImageUrl())
+                    .placeholder(R.drawable.home_screen)
+                    .error(R.drawable.ic_launcher_background)
+                    .into(profilePic);
+        }else {
+            profilePic.setImageResource(R.drawable.not_set);
+        }
     }
     private void bottomNav(){
         navServices.setOnClickListener(new View.OnClickListener() {

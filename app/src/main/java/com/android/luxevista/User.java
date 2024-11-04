@@ -16,15 +16,14 @@ public class User {
     private Boolean loginStatus;
     private String ImageUrl;
     private String Gender;
-
+    private String BirthDay;
     public User(String name, String username, String email, String password) {
         Name = name;
         Username = username;
         Email = email;
         Password = password;
     }
-
-    public User(int id, String name, String username, String email, String password, String phone, String address, String city, String postalCode, String county, Boolean loginStatus, String imageUrl, String gender) {
+    public User(int id, String name, String username, String email, String password, String phone, String address, String city, String postalCode, String county, Boolean loginStatus, String imageUrl, String gender, String birthDay) {
         Id = id;
         Name = name;
         Username = username;
@@ -38,6 +37,26 @@ public class User {
         this.loginStatus = loginStatus;
         ImageUrl = imageUrl;
         Gender = gender;
+        BirthDay = birthDay;
+    }
+
+    public User(String name, String username, String email, String password, String phone, String imageUrl, String gender, String birthDay) {
+        Name = name;
+        Username = username;
+        Email = email;
+        Password = password;
+        Phone = phone;
+        ImageUrl = imageUrl;
+        Gender = gender;
+        BirthDay = birthDay;
+    }
+
+    public User(String address, String city, String postalCode, String county, Boolean loginStatus) {
+        Address = address;
+        City = city;
+        PostalCode = postalCode;
+        County = county;
+        this.loginStatus = loginStatus;
     }
 
     public int getId() {
@@ -142,5 +161,13 @@ public class User {
 
     public void setGender(String gender) {
         Gender = gender;
+    }
+
+    public String getBirthDay() {
+        return BirthDay;
+    }
+
+    public void setBirthDay(String birthDay) {
+        BirthDay = birthDay;
     }
 }
