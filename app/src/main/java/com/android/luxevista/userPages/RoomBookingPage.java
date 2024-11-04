@@ -1,5 +1,7 @@
 package com.android.luxevista.userPages;
 
+import static com.android.luxevista.SharedPreference.USER_ID;
+
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -23,6 +25,7 @@ import com.android.luxevista.Booking;
 import com.android.luxevista.EventDecorator;
 import com.android.luxevista.R;
 import com.android.luxevista.Room;
+import com.android.luxevista.SharedPreference;
 import com.android.luxevista.User;
 import com.android.luxevista.adminPages.AddRoomPage;
 import com.android.luxevista.database.BookingDB;
@@ -60,6 +63,7 @@ public class RoomBookingPage extends AppCompatActivity {
     private double totalPrice =0, finalPrice=0, tax =0;
     private List<Booking> bookings;
     private List<String> bookingDates;
+    private String userID = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,10 +76,12 @@ public class RoomBookingPage extends AppCompatActivity {
             return insets;
         });
 
-        // TODO: 10/31/2024 need to set userId to userdata and booking add db
         roomDB = new RoomDB(this);
         bookingDB = new BookingDB(this);
         userDB = new UserDB(this);
+        SharedPreference sharedPreference = new SharedPreference();
+        userID = String.valueOf(sharedPreference.GetInt(this, USER_ID));
+
 
         checkInCalendar = Calendar.getInstance();
         checkOutCalendar = Calendar.getInstance();
@@ -245,7 +251,7 @@ public class RoomBookingPage extends AppCompatActivity {
                         edtName.getText().toString(),
                         edtEmail.getText().toString(),
                         edtPhone.getText().toString(),
-                        "1",
+                        userID,
                         roomID
                 );
 

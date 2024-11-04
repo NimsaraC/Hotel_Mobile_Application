@@ -1,5 +1,7 @@
 package com.android.luxevista.userPages;
 
+import static com.android.luxevista.SharedPreference.USER_ID;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +24,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.android.luxevista.Booking;
 import com.android.luxevista.LuxeService;
 import com.android.luxevista.R;
+import com.android.luxevista.SharedPreference;
 import com.android.luxevista.User;
 import com.android.luxevista.database.BookingDB;
 import com.android.luxevista.database.ServicesDB;
@@ -52,6 +55,8 @@ public class DiningBookingPage extends AppCompatActivity {
     private double fee;
     double basePrice = 50;
     double totalPrice;
+    private String userID = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +72,8 @@ public class DiningBookingPage extends AppCompatActivity {
         db = new ServicesDB(this);
         bookingDB = new BookingDB(this);
         userDB = new UserDB(this);
+        SharedPreference sharedPreference = new SharedPreference();
+        userID = String.valueOf(sharedPreference.GetInt(this, USER_ID));
 
         serviceId = getIntent().getIntExtra("serviceId", 0);
 
@@ -105,7 +112,7 @@ public class DiningBookingPage extends AppCompatActivity {
                                 edtName.getText().toString(),
                                 edtEmail.getText().toString(),
                                 edtPhone.getText().toString(),
-                                "1",
+                                userID,
                                 serviceID,
                                 spinnerGuests.getSelectedItem().toString()
                         );
@@ -217,7 +224,8 @@ public class DiningBookingPage extends AppCompatActivity {
         calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
             public void onDateSelected(MaterialCalendarView widget, CalendarDay date, boolean selected) {
-                String formattedDate = date.getYear() + "-" + (date.getMonth() + 1) + "-" + date.getDay();
+                String formattedDate = String.format("%04d-%02d-%02d", date.getYear(), date.getMonth() + 1, date.getDay());
+                //String formattedDate = date.getYear() + "-" + (date.getMonth() + 1) + "-" + date.getDay();
                 txtDate.setText(formattedDate);
             }
         });

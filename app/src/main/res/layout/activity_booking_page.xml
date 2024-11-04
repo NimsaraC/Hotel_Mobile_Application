@@ -102,11 +102,15 @@
                         android:textStyle="bold" />
                 </LinearLayout>
 
-                <CalendarView
+                <com.prolificinteractive.materialcalendarview.MaterialCalendarView
                     android:id="@+id/calendarView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"/>
+                    app:mcv_arrowColor="@color/Button"
+                    app:mcv_dateTextAppearance="@style/TextStyleCalender"
+                    app:mcv_headerTextAppearance="@style/TextStyleCalender"
+                    app:mcv_weekDayTextAppearance="@style/TextStyleCalender"
+                    app:mcv_showOtherDates="all" />
 
                 <TextView
                     android:layout_width="wrap_content"

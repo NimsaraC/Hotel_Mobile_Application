@@ -1,5 +1,7 @@
 package com.android.luxevista.database;
 
+import static com.android.luxevista.SharedPreference.USER_ID;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -295,6 +297,52 @@ public class BookingDB extends SQLiteOpenHelper {
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + EXPLORE_ID + " = ?";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(exploreId)});
+
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                do {
+                    Booking booking = new Booking(
+                            cursor.getInt(cursor.getColumnIndexOrThrow(BOOKING_ID)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(BOOKING_TITLE)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(BOOKING_TYPE)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(CHECKIN_DATE)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(CHECKOUT_DATE)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(BOOKING_DATE)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(BOOKING_STATUS)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(SPECIAL_REQUESTS)),
+                            cursor.getDouble(cursor.getColumnIndexOrThrow(TOTAL_PRICE)),
+                            cursor.getDouble(cursor.getColumnIndexOrThrow(TAXES)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(GUEST_NAME)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(GUEST_EMAIL)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(GUEST_PHONE)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(GUEST_ID)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(ROOM_ID)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(BOOKING_TIME)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(SERVICE_ID)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(DURATION)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(NUMBER_OF_GUESTS)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(CAPACITY)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(DAY_TYPE)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(EXPLORE_ID))
+
+                    );
+
+                    bookingList.add(booking);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        }
+
+        db.close();
+        return bookingList;
+    }
+
+    public List<Booking> getAllBookingsByUserId(int userId) {
+        List<Booking> bookingList = new ArrayList<>();
+
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + GUEST_ID + " = ?";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(userId)});
 
         if (cursor != null) {
             if (cursor.moveToFirst()) {
