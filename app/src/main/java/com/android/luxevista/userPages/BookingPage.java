@@ -139,24 +139,29 @@ public class BookingPage extends AppCompatActivity {
         LocalDate currentDate = LocalDate.now();
 
         for (Booking booking : bookings) {
+
             String bookingDateString = booking.getBookingDate();
             LocalDate bookingDate = LocalDate.parse(bookingDateString, formatter);
 
             bookingDates.add(bookingDateString);
 
             if(bookingDate.isAfter(currentDate) || bookingDate.isEqual(currentDate)){
-                if(booking.getRoomId() != null){
-                    roomBookings.add(booking);
-                    roomBookingDates.add(bookingDateString);
-                }else
-                if(booking.getServiceId() != null){
-                    serviceBooking.add(booking);
-                    serviceBookingDates.add(bookingDateString);
-                }else
-                if(booking.getExploreId() != null){
-                    exploreBooking.add(booking);
-                    exploreBookingDates.add(bookingDateString);
+                if(booking.getBookingStatus().equals("confirmed")){
+
+                    if(booking.getRoomId() != null){
+                        roomBookings.add(booking);
+                        roomBookingDates.add(bookingDateString);
+                    }else
+                    if(booking.getServiceId() != null){
+                        serviceBooking.add(booking);
+                        serviceBookingDates.add(bookingDateString);
+                    }else
+                    if(booking.getExploreId() != null){
+                        exploreBooking.add(booking);
+                        exploreBookingDates.add(bookingDateString);
+                    }
                 }
+
 
                 if(booking.getBookingStatus().equals("confirmed")){
                     upcomingBookingDates.add(bookingDateString);

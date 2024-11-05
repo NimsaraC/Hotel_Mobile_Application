@@ -182,4 +182,32 @@ public class ServicesDB extends SQLiteOpenHelper {
 
         return serviceList;
     }
+
+    public int editeServiceById(int id, LuxeService service){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(SERVICE_TITLE, service.getServiceTitle());
+        values.put(SERVICE_TYPE, service.getServiceType());
+        values.put(SERVICE_DESCRIPTION, service.getServiceDescription());
+        values.put(DURATION, service.getDuration());
+        values.put(PRICE, service.getPrice());
+        values.put(CUISINE, service.getCuisine());
+        values.put(RESERVATION, service.getReservation());
+        values.put(CAPACITY, service.getCapacity());
+        values.put(AMENITIES, service.getAmenities());
+        values.put(BOOKING_INSTRUCTION, service.getBookingInstruction());
+        values.put(CANCELLATION_POLICY, service.getCancellationPolicy());
+        values.put(COVER_IMAGE, service.getCoverImage());
+
+        if (service.getAdditionalImages() != null) {
+            String jsonImages = new Gson().toJson(service.getAdditionalImages());
+            values.put(ADDITIONAL_IMAGES, jsonImages);
+        } else {
+            values.put(ADDITIONAL_IMAGES, "[]");
+        }
+
+        int rowsAffected = db.update(TABLE_NAME, values, SERVICE_ID + " = ?", new String[]{String.valueOf(id)});
+        db.close();
+        return rowsAffected;
+    }
 }

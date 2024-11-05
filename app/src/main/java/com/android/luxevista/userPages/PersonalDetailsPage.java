@@ -107,7 +107,6 @@ public class PersonalDetailsPage extends AppCompatActivity {
         });
 
     }
-
     private void navButtons() {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -4,16 +4,19 @@ import static com.android.luxevista.SharedPreference.USER_ID;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -32,6 +35,7 @@ public class ProfilePage extends AppCompatActivity {
     private ImageView profilePic;
     private UserDB db;
     private User user;
+    private Switch darkModeSwitch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +68,35 @@ public class ProfilePage extends AppCompatActivity {
         bottomNav();
         signOut();
         buttons(userID);
+        themeChange();
+    }
+
+    private void themeChange() {
+        darkModeSwitch = findViewById(R.id.darkModeSwitch);
+
+        // Load saved dark mode preference
+        SharedPreferences sharedPreferences = getSharedPreferences("app_prefs", MODE_PRIVATE);
+        boolean isDarkMode = sharedPreferences.getBoolean("isDarkMode", false);
+        darkModeSwitch.setChecked(isDarkMode);
+        setDarkMode(isDarkMode);
+
+        // Listen for toggle changes
+        darkModeSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            // Save preference
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("isDarkMode", isChecked);
+            editor.apply();
+
+            // Apply the theme change
+            setDarkMode(isChecked);
+        });
+    }
+    private void setDarkMode(boolean isDarkMode) {
+        if (isDarkMode) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
     }
 
     private void buttons(int userID) {

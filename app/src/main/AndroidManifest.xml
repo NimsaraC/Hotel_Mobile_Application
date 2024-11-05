@@ -17,6 +17,24 @@
         android:theme="@style/Theme.LuxeVista"
         tools:targetApi="31">
         <activity
+            android:name=".userPages.ExploreBookingView"
+            android:exported="false" />
+        <activity
+            android:name=".userPages.PoolBookingView"
+            android:exported="false" />
+        <activity
+            android:name=".userPages.DiningBookingView"
+            android:exported="false" />
+        <activity
+            android:name=".userPages.SpaBookingView"
+            android:exported="false" />
+        <activity
+            android:name=".userPages.RoomBookingView"
+            android:exported="false" />
+        <activity
+            android:name=".BarcodeTest"
+            android:exported="false" />
+        <activity
             android:name=".userPages.UserAddressDetails"
             android:exported="false" />
         <activity

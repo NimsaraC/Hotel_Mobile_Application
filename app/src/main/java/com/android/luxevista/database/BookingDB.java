@@ -382,4 +382,34 @@ public class BookingDB extends SQLiteOpenHelper {
         db.close();
         return bookingList;
     }
+    public int editBookingById(int id, Booking booking){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(BOOKING_TITLE, booking.getBookingTitle());
+        values.put(BOOKING_TYPE, booking.getBookingType());
+        values.put(CHECKIN_DATE, booking.getCheckInDate());
+        values.put(CHECKOUT_DATE, booking.getCheckOutDate());
+        values.put(BOOKING_DATE, booking.getBookingDate());
+        values.put(BOOKING_STATUS, booking.getBookingStatus());
+        values.put(SPECIAL_REQUESTS, booking.getSpecialRequests());
+        values.put(TOTAL_PRICE, booking.getTotalPrice());
+        values.put(TAXES, booking.getTaxes());
+        values.put(GUEST_NAME, booking.getGuestName());
+        values.put(GUEST_EMAIL, booking.getGuestEmail());
+        values.put(GUEST_PHONE, booking.getGuestPhone());
+        values.put(GUEST_ID, booking.getUserId());
+        values.put(ROOM_ID, booking.getRoomId());
+        values.put(BOOKING_TIME, booking.getBookingTime());
+        values.put(SERVICE_ID, booking.getServiceId());
+        values.put(DURATION, booking.getDuration());
+        values.put(NUMBER_OF_GUESTS, booking.getNumberOfGuests());
+        values.put(CAPACITY, booking.getCapacity());
+        values.put(DAY_TYPE, booking.getDayType());
+        values.put(EXPLORE_ID, booking.getExploreId());
+
+        int rowsAffected = db.update(TABLE_NAME, values, BOOKING_ID + " = ?", new String[]{String.valueOf(id)});
+        db.close();
+        return rowsAffected;
+    }
 }

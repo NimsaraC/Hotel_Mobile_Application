@@ -42,6 +42,8 @@ dependencies {
     implementation ("com.google.code.gson:gson:2.8.9")
     implementation ("androidx.viewpager2:viewpager2:1.0.0")
     implementation ("com.prolificinteractive:material-calendarview:1.4.3")
+    implementation ("com.journeyapps:zxing-android-embedded:4.3.0")
+    implementation ("com.google.zxing:core:3.3.3")
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

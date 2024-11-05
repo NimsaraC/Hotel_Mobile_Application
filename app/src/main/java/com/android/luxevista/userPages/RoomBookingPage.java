@@ -246,7 +246,7 @@ public class RoomBookingPage extends AppCompatActivity {
                         edtCheckIn.getText().toString(),
                         "confirmed",
                         request,
-                        (totalPrice + tax),
+                        totalPrice,
                         tax,
                         edtName.getText().toString(),
                         edtEmail.getText().toString(),

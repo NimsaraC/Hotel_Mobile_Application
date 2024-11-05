@@ -158,4 +158,26 @@ public class ExploreDB extends SQLiteOpenHelper {
 
         return exploreList;
     }
+    public int editeExploreById(int id, Explore explore){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(TITLE, explore.getTitle());
+        values.put(TYPE, explore.getType());
+        values.put(DESCRIPTION, explore.getDescription());
+        values.put(DURATION, explore.getDuration());
+        values.put(PRICE, explore.getPrice());
+        values.put(BOOKING_DETAILS, explore.getBookingDetails());
+        values.put(SPECIAL_NOTE, explore.getSpecialNote());
+        values.put(COVER_IMAGE, explore.getCoverImage());
+        if (explore.getAdditionalImages() != null) {
+            String jsonImages = new Gson().toJson(explore.getAdditionalImages());
+            values.put(ADDITIONAL_IMAGES, jsonImages);
+        } else {
+            values.put(ADDITIONAL_IMAGES, "[]");
+        }
+        int rowsAffected = db.update(TABLE_NAME, values, ID + " = ?", new String[]{String.valueOf(id)});
+        db.close();
+        return rowsAffected;
+    }
 }

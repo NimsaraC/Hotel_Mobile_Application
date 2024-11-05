@@ -17,6 +17,7 @@
         android:layout_marginBottom="20dp">
 
         <LinearLayout
+            android:id="@+id/btnRoomBooking"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/card"
