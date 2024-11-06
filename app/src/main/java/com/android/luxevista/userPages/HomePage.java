@@ -8,8 +8,10 @@ import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -45,6 +47,7 @@ public class HomePage extends AppCompatActivity {
     private TabLayout tabLayout;
     private LinearLayout navRooms, navServices, navExplore, navProfile, btnProfile;
     private boolean doubleBackToExitPressedOnce = false;
+    private TextView edtSearch;
     private RoomDB roomDB;
     private Room room;
     private List<Room> roomList;
@@ -69,6 +72,14 @@ public class HomePage extends AppCompatActivity {
         navRooms = findViewById(R.id.linearLayoutRooms);
         navProfile = findViewById(R.id.linearLayoutProfile);
         btnProfile = findViewById(R.id.btnProfile);
+        edtSearch = findViewById(R.id.edtSearch);
+
+        edtSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(HomePage.this, "Soon", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         bottomNav();
         banners();

@@ -82,8 +82,8 @@
                 android:background="@color/background"
                 android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/editTextText"
+                <TextView
+                    android:id="@+id/edtSearch"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginStart="10dp"
@@ -93,11 +93,12 @@
                     android:background="@drawable/text_filed"
                     android:ems="10"
                     android:fontFamily="@font/title"
-                    android:inputType="text"
                     android:padding="0dp"
+                    android:gravity="center"
                     android:text="Search"
+                    android:textSize="20dp"
                     android:textAlignment="center"
-                    android:textColor="@color/white"
+                    android:textColor="@color/subtitle"
                     android:textStyle="bold" />
 
                 <LinearLayout

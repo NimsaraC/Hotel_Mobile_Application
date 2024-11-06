@@ -136,11 +136,24 @@ public class DiningBookingPage extends AppCompatActivity {
     private void setServiceDetails() {
         txtType.setText(service.getServiceType());
         txtCuisine.setText(service.getCuisine());
-        Picasso.get()
-                .load(service.getCoverImage())
-                .placeholder(R.drawable.ic_launcher_background)
-                .error(R.drawable.home_screen)
-                .into(coverImage);
+        String imageUrl = service.getCoverImage();
+
+        if (imageUrl.startsWith("drawable/")) {
+            String drawableName = imageUrl.replace("drawable/", "").replace(".jpg", "");
+            int drawableResId = this.getResources().getIdentifier(drawableName, "drawable", this.getPackageName());
+
+            if (drawableResId != 0) {
+                coverImage.setImageResource(drawableResId);
+            } else {
+                coverImage.setImageResource(R.drawable.home_screen);
+            }
+        }else{
+            Picasso.get()
+                    .load(service.getCoverImage())
+                    .placeholder(R.drawable.ic_launcher_background)
+                    .error(R.drawable.home_screen)
+                    .into(coverImage);
+        }
     }
     private void setGuestDetails() {
         user = userDB.getUserById(1);

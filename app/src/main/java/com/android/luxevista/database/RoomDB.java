@@ -62,6 +62,7 @@ public class RoomDB extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(TABLE_CREATE);
+        insertDummyData(db);
     }
 
     @Override
@@ -165,6 +166,145 @@ public List<Room> getAllRooms() {
     db.close();
     return roomList;
 }
+
+    private void insertDummyData(SQLiteDatabase db){
+        ContentValues values = new ContentValues();
+
+        values.put(ROOM_TYPE, "Ocean View");
+        values.put(DESCRIPTION, "Spacious suite with panoramic ocean views, private balcony, and luxurious seating area.");
+        values.put(ROOM_SIZE, 800);
+        values.put(BED_TYPE, "King-Size Bed");
+        values.put(VIEW, "Full oceanfront view");
+        values.put(OCCUPANCY, 2);
+        values.put(AMENITIES, "Mini bar \npremium coffee machine \nhigh-speed Wi-Fi \nand a rainfall shower.");
+        values.put(ADDITIONAL_SERVICES, "Daily housekeeping\nin-room dining \nturndown service.");
+        values.put(CHECKIN_TIME, "03:00 PM");
+        values.put(CHECKOUT_TIME, "12:00 PM");
+        values.put(CANCELLATION_POLICY, "Free cancellation up to 48 hours before arrival.");
+        values.put(NO_SMOKING_POLICY, "Non-smoking room");
+        values.put(RATE, 450);
+        values.put(COVER_IMAGE, "drawable/ocean_view_room");
+        values.put(ADDITIONAL_IMAGES, "drawable/ocean_view_room");
+
+        db.insert(TABLE_NAME, null, values);
+
+        values.clear();
+        values.put(ROOM_TYPE, "Ocean View");
+        values.put(DESCRIPTION, "Elegant room with floor-to-ceiling windows and a breathtaking view of the ocean.");
+        values.put(ROOM_SIZE, 500);
+        values.put(BED_TYPE, " Queen-Size Bed");
+        values.put(VIEW, "Full oceanfront view");
+        values.put(OCCUPANCY, 2);
+        values.put(AMENITIES, "Wi-Fi\nair conditioning\nespresso machine\nspa-inspired bathroom\nbeach towels.");
+        values.put(ADDITIONAL_SERVICES, "24-hour room service\n express laundry \ncomplimentary breakfast.");
+        values.put(CHECKIN_TIME, "03:00 PM");
+        values.put(CHECKOUT_TIME, "12:00 PM");
+        values.put(CANCELLATION_POLICY, "Free cancellation up to 24 hours before arrival.");
+        values.put(NO_SMOKING_POLICY, "Non-smoking room");
+        values.put(RATE, 400);
+        values.put(COVER_IMAGE, "drawable/ocean_view_room");
+        values.put(ADDITIONAL_IMAGES, "drawable/ocean_view_room");
+
+        db.insert(TABLE_NAME, null, values);
+
+        values.clear();
+        values.put(ROOM_TYPE, "Ocean View");
+        values.put(DESCRIPTION, "Relax in this luxurious room with a private patio overlooking the beach.");
+        values.put(ROOM_SIZE, 550);
+        values.put(BED_TYPE, "King-Size Bed");
+        values.put(VIEW, "Full oceanfront view");
+        values.put(OCCUPANCY, 2);
+        values.put(AMENITIES, "Wi-Fi\n 55” Smart TV\n minibar\n plush bathrobes\nprivate safe");
+        values.put(ADDITIONAL_SERVICES, "Daily housekeeping\ncomplimentary breakfast \nvalet parking");
+        values.put(CHECKIN_TIME, "02:00 PM");
+        values.put(CHECKOUT_TIME, "12:00 AM");
+        values.put(CANCELLATION_POLICY, "Free cancellation up to 72 hours before arrival.");
+        values.put(NO_SMOKING_POLICY, "Non-smoking room");
+        values.put(RATE, 400);
+        values.put(COVER_IMAGE, "drawable/ocean_view_room");
+        values.put(ADDITIONAL_IMAGES, "drawable/ocean_view_room");
+
+        db.insert(TABLE_NAME, null, values);
+
+        values.clear();
+        values.put(ROOM_TYPE, "Family");
+        values.put(DESCRIPTION, "Spacious suite with a garden view, ideal for families.");
+        values.put(ROOM_SIZE, 900);
+        values.put(BED_TYPE, "One King-Size Bed and Two Twin Beds");
+        values.put(VIEW, "Full oceanfront view");
+        values.put(OCCUPANCY, 2);
+        values.put(AMENITIES, "Wi-Fi \ntwo TVs\nkitchenette\ndining area.");
+        values.put(ADDITIONAL_SERVICES, "Daily housekeeping\nroom service");
+        values.put(CHECKIN_TIME, "03:00 PM");
+        values.put(CHECKOUT_TIME, "12:00 AM");
+        values.put(CANCELLATION_POLICY, "Free cancellation up to 48 hours before arrival.");
+        values.put(NO_SMOKING_POLICY, "Non-smoking room");
+        values.put(RATE, 500);
+        values.put(COVER_IMAGE, "drawable/family_room");
+        values.put(ADDITIONAL_IMAGES, "drawable/family_room");
+
+        db.insert(TABLE_NAME, null, values);
+
+        values.clear();
+        values.put(ROOM_TYPE, "Family");
+        values.put(DESCRIPTION, "Spacious two-bedroom suite with modern amenities.");
+        values.put(ROOM_SIZE, 1200);
+        values.put(BED_TYPE, "King-Size Bed and Queen-Size Bed");
+        values.put(VIEW, "Full oceanfront view");
+        values.put(OCCUPANCY, 5);
+        values.put(AMENITIES, "Wi-Fi\nmultiple TVs\nfull kitchen\nprivate balcony.");
+        values.put(ADDITIONAL_SERVICES, "Daily housekeeping\nturndown service\nkids’ amenities");
+        values.put(CHECKIN_TIME, "03:00 PM");
+        values.put(CHECKOUT_TIME, "12:00 AM");
+        values.put(CANCELLATION_POLICY, "Free cancellation up to 72 hours before arrival.");
+        values.put(NO_SMOKING_POLICY, "Non-smoking room");
+        values.put(RATE, 550);
+        values.put(COVER_IMAGE, "drawable/family_room");
+        values.put(ADDITIONAL_IMAGES, "drawable/family_room");
+
+        db.insert(TABLE_NAME, null, values);
+
+        values.clear();
+        values.put(ROOM_TYPE, "Deluxe Garden");
+        values.put(DESCRIPTION, "Elegant room with a city view and modern design.");
+        values.put(ROOM_SIZE, 500);
+        values.put(BED_TYPE, "King-Size Bed");
+        values.put(VIEW, "Partial garden and pool view");
+        values.put(OCCUPANCY, 2);
+        values.put(AMENITIES, "Wi-Fin\nflat-screen TV\nminibar\ncoffee maker");
+        values.put(ADDITIONAL_SERVICES, "Daily housekeeping\nroom service");
+        values.put(CHECKIN_TIME, "03:00 PM");
+        values.put(CHECKOUT_TIME, "12:00 AM");
+        values.put(CANCELLATION_POLICY, "Free cancellation up to 24 hours before arrival.");
+        values.put(NO_SMOKING_POLICY, "Non-smoking room");
+        values.put(RATE, 300);
+        values.put(COVER_IMAGE, "drawable/deluxe_room");
+        values.put(ADDITIONAL_IMAGES, "drawable/deluxe_room");
+
+        db.insert(TABLE_NAME, null, values);
+
+        values.clear();
+        values.put(ROOM_TYPE, "Deluxe Garden");
+        values.put(DESCRIPTION, "Perfect for friends or small families, this room offers modern decor and two plush double beds.");
+        values.put(ROOM_SIZE, 450);
+        values.put(BED_TYPE, "Two Double Beds");
+        values.put(VIEW, "Garden view");
+        values.put(OCCUPANCY, 4);
+        values.put(AMENITIES, "Wi-Fin\nflat-screen TV\nminibar\ncoffee maker");
+        values.put(ADDITIONAL_SERVICES, "Daily housekeeping\nroom service");
+        values.put(CHECKIN_TIME, "02:00 PM");
+        values.put(CHECKOUT_TIME, "12:00 AM");
+        values.put(CANCELLATION_POLICY, "Free cancellation up to 24 hours before arrival.");
+        values.put(NO_SMOKING_POLICY, "Non-smoking room");
+        values.put(RATE, 320);
+        values.put(COVER_IMAGE, "drawable/deluxe_room");
+        values.put(ADDITIONAL_IMAGES, "drawable/deluxe_room");
+
+        db.insert(TABLE_NAME, null, values);
+
+    }
+
+
 
 
 }

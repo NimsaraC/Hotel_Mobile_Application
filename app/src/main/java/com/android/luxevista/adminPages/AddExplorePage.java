@@ -229,7 +229,8 @@ public class AddExplorePage extends AppCompatActivity {
         if(serviceTitle.equals("Local Attractions")){
             String[] serviceTypes = new String[]{
                     "Historic Lighthouse Tour",
-                    "Cultural Heritage Museum"
+                    "Cultural Heritage Museum",
+                    "Historic Coastal Village Tour"
             };
             ArrayAdapter<String> adapter = new ArrayAdapter<>(
                     this,

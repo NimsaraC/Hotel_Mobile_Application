@@ -10,6 +10,7 @@ import com.android.luxevista.Explore;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ExploreDB extends SQLiteOpenHelper {
@@ -49,6 +50,7 @@ public class ExploreDB extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(TABLE_CREATE);
+        insertDummyData(db);
     }
 
     @Override
@@ -68,13 +70,7 @@ public class ExploreDB extends SQLiteOpenHelper {
         values.put(BOOKING_DETAILS, explore.getBookingDetails());
         values.put(SPECIAL_NOTE, explore.getSpecialNote());
         values.put(COVER_IMAGE, explore.getCoverImage());
-
-        if (explore.getAdditionalImages() != null) {
-            String jsonImages = new Gson().toJson(explore.getAdditionalImages());
-            values.put(ADDITIONAL_IMAGES, jsonImages);
-        } else {
-            values.put(ADDITIONAL_IMAGES, "[]");
-        }
+        values.put(ADDITIONAL_IMAGES, explore.getAdditionalImages().toString());
 
         Long result = -1L;
         try {
@@ -96,12 +92,7 @@ public class ExploreDB extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(id)});
 
         if (cursor.moveToFirst()) {
-            List<String> additionalImages = new ArrayList<>();
-            String imagesJson = cursor.getString(cursor.getColumnIndexOrThrow(ADDITIONAL_IMAGES));
-            if (imagesJson != null && !imagesJson.isEmpty()) {
-                additionalImages = new Gson().fromJson(imagesJson, ArrayList.class);
-            }
-
+            List<String> additionalImages = new ArrayList<>(Arrays.asList(cursor.getString(cursor.getColumnIndexOrThrow(ADDITIONAL_IMAGES)).split(",")));
             explore = new Explore(
                     cursor.getInt(cursor.getColumnIndexOrThrow(ID)),
                     cursor.getString(cursor.getColumnIndexOrThrow(TITLE)),
@@ -130,11 +121,7 @@ public class ExploreDB extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()) {
             do {
-                List<String> additionalImages = new ArrayList<>();
-                String imagesJson = cursor.getString(cursor.getColumnIndexOrThrow(ADDITIONAL_IMAGES));
-                if (imagesJson != null && !imagesJson.isEmpty()) {
-                    additionalImages = new Gson().fromJson(imagesJson, ArrayList.class);
-                }
+                List<String> additionalImages = new ArrayList<>(Arrays.asList(cursor.getString(cursor.getColumnIndexOrThrow(ADDITIONAL_IMAGES)).split(",")));
 
                 Explore explore = new Explore(
                         cursor.getInt(cursor.getColumnIndexOrThrow(ID)),
@@ -170,14 +157,53 @@ public class ExploreDB extends SQLiteOpenHelper {
         values.put(BOOKING_DETAILS, explore.getBookingDetails());
         values.put(SPECIAL_NOTE, explore.getSpecialNote());
         values.put(COVER_IMAGE, explore.getCoverImage());
-        if (explore.getAdditionalImages() != null) {
-            String jsonImages = new Gson().toJson(explore.getAdditionalImages());
-            values.put(ADDITIONAL_IMAGES, jsonImages);
-        } else {
-            values.put(ADDITIONAL_IMAGES, "[]");
-        }
+        values.put(ADDITIONAL_IMAGES, explore.getAdditionalImages().toString());
         int rowsAffected = db.update(TABLE_NAME, values, ID + " = ?", new String[]{String.valueOf(id)});
         db.close();
         return rowsAffected;
+    }
+
+    private void insertDummyData(SQLiteDatabase db){
+        ContentValues values = new ContentValues();
+
+        values.put(TITLE, "Local Attractions");
+        values.put(TYPE, "Historic Coastal Village Tour");
+        values.put(DESCRIPTION, "Explore the charm of the nearby coastal village with guided tours of historical landmarks, local artisan shops, and scenic viewpoints.");
+        values.put(DURATION, 2);
+        values.put(PRICE, 60);
+        values.put(BOOKING_DETAILS, "Book your tour through the app to reserve your spot. Select your preferred tour time and group size.");
+        values.put(SPECIAL_NOTE, "Cancellations must be made 24 hours in advance for a full refund.");
+        values.put(COVER_IMAGE, "drawable/ocean_view_room");
+        values.put(ADDITIONAL_IMAGES, "drawable/local_explore");
+
+        db.insert(TABLE_NAME, null, values);
+
+        values.clear();
+        values.put(TITLE, "Water Activities");
+        values.put(TYPE, "Sunset Catamaran Cruise");
+        values.put(DESCRIPTION, "Set sail on a luxury catamaran to enjoy the breathtaking sunset views, complete with refreshments and live music on board.");
+        values.put(DURATION, 1.5);
+        values.put(PRICE, 80);
+        values.put(BOOKING_DETAILS, "Reserve your cruise time through the app. Early booking is recommended as spaces are limited.");
+        values.put(SPECIAL_NOTE, "Cancellations must be made 24 hours in advance for a full refund.");
+        values.put(COVER_IMAGE, "drawable/water_explore");
+        values.put(ADDITIONAL_IMAGES, "drawable/water_explore");
+
+        db.insert(TABLE_NAME, null, values);
+
+        values.clear();
+        values.put(TITLE, "Nightlife Experiences");
+        values.put(TYPE, "Beachfront Bonfire Party");
+        values.put(DESCRIPTION, "Join an exclusive beachfront bonfire with music, drinks, and dance under the stars—a perfect way to unwind and mingle.");
+        values.put(DURATION, 4);
+        values.put(PRICE, 50);
+        values.put(BOOKING_DETAILS, "Secure your spot via the app. Early booking is advised due to limited space.");
+        values.put(SPECIAL_NOTE, "Cancellations must be made 12 hours in advance for a full refund.");
+        values.put(COVER_IMAGE, "drawable/nightlife_explore");
+        values.put(ADDITIONAL_IMAGES, "drawable/nightlife_explore");
+
+        db.insert(TABLE_NAME, null, values);
+
+
     }
 }

@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,6 +39,8 @@ public class ExplorePage extends AppCompatActivity {
     private FrameLayout frameLayout;
     private LinearLayout navRooms, navServices, navProfile, btnProfile;
     private Explore explore;
+    private TextView edtSearch;
+
     private ExploreDB db;
     private List<Explore> exploreList;
     private ViewPager2 viewPager;
@@ -65,6 +69,14 @@ public class ExplorePage extends AppCompatActivity {
         navRooms = findViewById(R.id.linearLayoutRooms);
         navProfile = findViewById(R.id.linearLayoutProfile);
         btnProfile = findViewById(R.id.btnProfile);
+        edtSearch = findViewById(R.id.edtSearch);
+
+        edtSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ExplorePage.this, "Soon", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         bottomNav();
         banners();

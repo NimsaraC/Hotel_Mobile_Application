@@ -46,11 +46,26 @@ public class HomePageExploreAdapter extends RecyclerView.Adapter<HomePageExplore
 
         Uri imageUri = Uri.parse(explore.getCoverImage());
 
-        Picasso.get()
-                .load(imageUri)
-                .placeholder(R.drawable.home_screen)
-                .error(R.drawable.home_screen)
-                .into(holder.imvCover);
+        String imageUrl = explore.getCoverImage();
+
+        if (imageUrl.startsWith("drawable/")) {
+            String drawableName = imageUrl.replace("drawable/", "").replace(".jpg", "");
+            int drawableResId = context.getResources().getIdentifier(drawableName, "drawable", context.getPackageName());
+
+            if (drawableResId != 0) {
+                holder.imvCover.setImageResource(drawableResId);
+            } else {
+                holder.imvCover.setImageResource(R.drawable.home_screen);
+            }
+        }else{
+            Picasso.get()
+                    .load(imageUri)
+                    .placeholder(R.drawable.home_screen)
+                    .error(R.drawable.home_screen)
+                    .into(holder.imvCover);
+        }
+
+
 
         holder.exploreBtn.setOnClickListener(new View.OnClickListener() {
 

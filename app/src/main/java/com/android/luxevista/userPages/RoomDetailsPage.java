@@ -167,12 +167,24 @@ public class RoomDetailsPage extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        String imageUrl = room.getCoverImage();
 
-        Picasso.get()
-                .load(room.getCoverImage())
-                .placeholder(R.drawable.ic_launcher_background)
-                .error(R.drawable.home_screen)
-                .into(coverImage);
+        if (imageUrl.startsWith("drawable/")) {
+            String drawableName = imageUrl.replace("drawable/", "").replace(".jpg", "");
+            int drawableResId = this.getResources().getIdentifier(drawableName, "drawable", this.getPackageName());
+
+            if (drawableResId != 0) {
+                coverImage.setImageResource(drawableResId);
+            } else {
+                coverImage.setImageResource(R.drawable.home_screen);
+            }
+        }else{
+            Picasso.get()
+                    .load(room.getCoverImage())
+                    .placeholder(R.drawable.home_screen)
+                    .error(R.drawable.home_screen)
+                    .into(coverImage);
+        }
     }
     private void bookButton(){
         btnBookNow.setOnClickListener(new View.OnClickListener() {

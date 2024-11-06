@@ -12,7 +12,7 @@ public class LuxeService {
     private String cuisine;
     private String reservation;
     private String capacity;
-    private String Amenities;
+    private String amenities;
     private String bookingInstruction;
     private String cancellationPolicy;
     private String coverImage;
@@ -28,7 +28,7 @@ public class LuxeService {
         this.cuisine = cuisine;
         this.reservation = reservation;
         this.capacity = capacity;
-        Amenities = amenities;
+        this.amenities = amenities;
         this.bookingInstruction = bookingInstruction;
         this.cancellationPolicy = cancellationPolicy;
         this.coverImage = coverImage;
@@ -68,8 +68,12 @@ public class LuxeService {
         this.coverImage = coverImage;
         this.cancellationPolicy = cancellationPolicy;
         this.bookingInstruction = bookingInstruction;
-        Amenities = amenities;
+        this.amenities = amenities;
         this.capacity = capacity;
+    }
+
+    public LuxeService() {
+
     }
 
     public int getId() {
@@ -145,11 +149,11 @@ public class LuxeService {
     }
 
     public String getAmenities() {
-        return Amenities;
+        return amenities;
     }
 
     public void setAmenities(String amenities) {
-        Amenities = amenities;
+        this.amenities = amenities;
     }
 
     public String getBookingInstruction() {

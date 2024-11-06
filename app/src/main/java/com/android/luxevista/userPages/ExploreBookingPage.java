@@ -187,13 +187,25 @@ public class ExploreBookingPage extends AppCompatActivity {
         txtFee.setText(String.format("$ %.2f", fee));
         txtFinalPrice.setText(String.format("$ %.2f", totalPrice + fee));
 
-        Picasso.get()
-                .load(explore.getCoverImage())
-                .placeholder(R.drawable.ic_launcher_background)
-                .error(R.drawable.home_screen)
-                .into(coverImage);
-    }
+        String imageUrl = explore.getCoverImage();
 
+        if (imageUrl.startsWith("drawable/")) {
+            String drawableName = imageUrl.replace("drawable/", "").replace(".jpg", "");
+            int drawableResId = this.getResources().getIdentifier(drawableName, "drawable", this.getPackageName());
+
+            if (drawableResId != 0) {
+                coverImage.setImageResource(drawableResId);
+            } else {
+                coverImage.setImageResource(R.drawable.home_screen);
+            }
+        }else{
+            Picasso.get()
+                    .load(explore.getCoverImage())
+                    .placeholder(R.drawable.ic_launcher_background)
+                    .error(R.drawable.home_screen)
+                    .into(coverImage);
+        }
+    }
     private void setGuestDetails() {
         user = userDB.getUserById(1);
 

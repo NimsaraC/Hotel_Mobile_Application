@@ -49,11 +49,26 @@ public class HomePageServiceAdapter extends RecyclerView.Adapter<HomePageService
 
         Uri imageUri = Uri.parse(service.getCoverImage());
 
-        Picasso.get()
-                .load(imageUri)
-                .placeholder(R.drawable.home_screen)
-                .error(R.drawable.home_screen)
-                .into(holder.imvCover);
+        String imageUrl = service.getCoverImage();
+
+        if (imageUrl.startsWith("drawable/")) {
+            String drawableName = imageUrl.replace("drawable/", "").replace(".jpg", "");
+            int drawableResId = context.getResources().getIdentifier(drawableName, "drawable", context.getPackageName());
+
+            if (drawableResId != 0) {
+                holder.imvCover.setImageResource(drawableResId);
+            } else {
+                holder.imvCover.setImageResource(R.drawable.home_screen);
+            }
+        }else{
+            Picasso.get()
+                    .load(imageUri)
+                    .placeholder(R.drawable.home_screen)
+                    .error(R.drawable.home_screen)
+                    .into(holder.imvCover);
+        }
+
+
 
         holder.serviceBtn.setOnClickListener(new View.OnClickListener() {
             @Override

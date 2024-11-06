@@ -48,11 +48,26 @@ public class HomePageRoomAdapter extends RecyclerView.Adapter<HomePageRoomAdapte
 
         Uri imageUri = Uri.parse(room.getCoverImage());
 
-        Picasso.get()
-                .load(imageUri)
-                .placeholder(R.drawable.home_screen)
-                .error(R.drawable.home_screen)
-                .into(holder.imvCover);
+        String imageUrl = room.getCoverImage();
+
+        if (imageUrl.startsWith("drawable/")) {
+            String drawableName = imageUrl.replace("drawable/", "").replace(".jpg", "");
+            int drawableResId = context.getResources().getIdentifier(drawableName, "drawable", context.getPackageName());
+
+            if (drawableResId != 0) {
+                holder.imvCover.setImageResource(drawableResId);
+            } else {
+                holder.imvCover.setImageResource(R.drawable.home_screen);
+            }
+        }else{
+            Picasso.get()
+                    .load(imageUri)
+                    .placeholder(R.drawable.home_screen)
+                    .error(R.drawable.home_screen)
+                    .into(holder.imvCover);
+        }
+
+
 
         holder.roomBtn.setOnClickListener(new View.OnClickListener() {
             @Override
