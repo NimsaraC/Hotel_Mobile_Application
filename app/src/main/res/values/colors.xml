@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="background">#2D3250</color>
-    <color name="subtitle">#7077A1</color>
-    <color name="Button">#F6B17A</color>
-    <color name="card">#424769</color>
-    <color name="glass">#00FFFFFF</color>
-    <color name="Purple">#0E134E</color>
+<color name="black">#FF000000</color>
+<color name="white">#FFFFFFFF</color>
+<color name="background">#2D3250</color>
+<color name="subtitle">#7077A1</color>
+<color name="Button">#F6B17A</color>
+<color name="card">#424769</color>
+<color name="glass">#00FFFFFF</color>
+<color name="Purple">#0E134E</color>
+<color name="thumb_color">#F6B17A</color>
+<color name="track_color">#7077A1</color>
 </resources>

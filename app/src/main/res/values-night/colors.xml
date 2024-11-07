@@ -2,10 +2,10 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="background">#2D3250</color>
-    <color name="subtitle">#7077A1</color>
-    <color name="Button">#F6B17A</color>
-    <color name="card">#424769</color>
+    <color name="background">#181C14</color>
+    <color name="subtitle">#697565</color>
+    <color name="Button">#ECDFCC</color>
+    <color name="card">#3C3D37</color>
     <color name="glass">#00FFFFFF</color>
     <color name="Purple">#0E134E</color>
 </resources>

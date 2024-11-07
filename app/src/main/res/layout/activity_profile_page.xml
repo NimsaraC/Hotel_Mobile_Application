@@ -97,10 +97,20 @@
                         <!-- Dark mode switch -->
                         <Switch
                             android:id="@+id/darkModeSwitch"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:padding="8dp"
+                            android:layout_marginTop="10dp"
+                            android:text="Enable Dark Mode"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            android:thumbTint="@color/thumb_color"
+                            android:trackTint="@color/track_color"
                             android:focusedByDefault="true"
-                            android:text="Enable Dark Mode"/>
+                            android:background="@drawable/text_filed" />
+
 
                     </LinearLayout>
 
@@ -347,6 +357,8 @@
                         </LinearLayout>
 
                     </androidx.cardview.widget.CardView>
+
+
 
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"

@@ -74,9 +74,8 @@ public class ProfilePage extends AppCompatActivity {
     private void themeChange() {
         darkModeSwitch = findViewById(R.id.darkModeSwitch);
 
-        // Load saved dark mode preference
         SharedPreferences sharedPreferences = getSharedPreferences("app_prefs", MODE_PRIVATE);
-        boolean isDarkMode = sharedPreferences.getBoolean("isDarkMode", false);
+        boolean isDarkMode = sharedPreferences.getBoolean("isDarkMode", true);
         darkModeSwitch.setChecked(isDarkMode);
         setDarkMode(isDarkMode);
 
